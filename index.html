@@ -1,0 +1,4650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Gas exchange challenge — Physics / Form 5</title>
+
+<style>
+  :root {
+    --paper: #f4f3ed;
+    --surface: #ffffff;
+    --ink: #142f38;
+    --muted: #4c6269;
+    --line: #cbd6d2;
+    --teal: #08675f;
+    --teal-soft: #e2f2ec;
+    --orange: #ac3e22;
+    --orange-soft: #fff0e7;
+    --lime: #e0edb0;
+    --focus: #125bb5;
+    --danger: #9e2020;
+    --radius: 20px;
+    --shadow: 0 12px 35px rgb(20 47 56 / 5%);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+
+  html { scroll-behavior: auto; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  button, input, textarea, select { font: inherit; }
+
+  button, input, textarea, select, summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button, summary, select { cursor: pointer; }
+
+  button {
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--ink);
+    border-radius: 11px;
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 650;
+    line-height: 1.35;
+    transition: background .15s, border-color .15s;
+  }
+
+  button:hover:not(:disabled) { background: #edf2ef; }
+
+  button.primary {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+
+  button.primary:hover:not(:disabled) { background: #254951; }
+
+  button.accent {
+    background: var(--lime);
+    color: var(--ink);
+    border-color: #8b9d55;
+  }
+
+  button.quiet { border-color: var(--line); }
+
+  button:disabled {
+    opacity: .48;
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 4px;
+  }
+
+  h1, h2, h3, h4, p { margin-top: 0; }
+
+  h1 {
+    font-size: clamp(2.8rem, 6vw, 5.7rem);
+    line-height: 1.02;
+    letter-spacing: -.065em;
+    margin-bottom: 24px;
+  }
+
+  h1 span { color: var(--teal); }
+
+  h2 {
+    font-size: clamp(1.55rem, 3vw, 2.3rem);
+    line-height: 1.17;
+    letter-spacing: -.035em;
+    margin-bottom: 14px;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  h4 { margin-bottom: 8px; }
+
+  small, .small { font-size: .87rem; }
+  .muted { color: var(--muted); }
+
+  .eyebrow {
+    font-size: .76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    margin-bottom: 14px;
+  }
+
+  .skip {
+    position: absolute;
+    top: -100px;
+    left: 12px;
+    z-index: 20;
+    background: white;
+    color: var(--ink);
+    padding: 12px;
+  }
+
+  .skip:focus { top: 12px; }
+
+  .topbar {
+    max-width: 1440px;
+    margin: auto;
+    padding: 20px clamp(16px, 4vw, 52px);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-right: auto;
+    min-width: 220px;
+  }
+
+  .brand svg {
+    width: 46px;
+    height: 38px;
+    flex: none;
+  }
+
+  .brand strong {
+    display: block;
+    font-size: .91rem;
+    letter-spacing: -.02em;
+  }
+
+  .brand small {
+    display: block;
+    color: var(--muted);
+  }
+
+  .teacher-toggle, .check-label {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    width: 21px;
+    height: 21px;
+    flex: none;
+    accent-color: var(--teal);
+  }
+
+  main {
+    max-width: 1280px;
+    margin: auto;
+    padding: 42px clamp(16px, 4vw, 40px) 60px;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 36px;
+    align-items: start;
+    padding-bottom: 28px;
+  }
+
+  .hero-copy { max-width: 66ch; }
+  .hero-copy p { margin-bottom: 15px; }
+
+  .model-note {
+    padding: 17px 19px;
+    border-left: 4px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    background: var(--orange-soft);
+    font-size: .91rem;
+  }
+
+  details {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 16px;
+    background: #ffffffa8;
+  }
+
+  details + details { margin-top: 12px; }
+
+  summary {
+    min-height: 30px;
+    font-weight: 700;
+  }
+
+  details[open] summary { margin-bottom: 12px; }
+
+  details ul {
+    padding-left: 21px;
+    margin-bottom: 8px;
+  }
+
+  .stage-rail {
+    padding: 0;
+    margin: 0 0 22px;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .stage-rail li {
+    padding: 14px 17px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 650;
+    background: #ffffff70;
+  }
+
+  .stage-rail li + li { border-left: 1px solid var(--line); }
+
+  .stage-rail b {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: .85rem;
+  }
+
+  .stage-rail li[aria-current="step"] {
+    background: var(--ink);
+    color: white;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .fact {
+    background: #ffffffa8;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 13px 16px;
+    min-width: 0;
+  }
+
+  .fact span {
+    display: block;
+    color: var(--muted);
+    font-size: .83rem;
+  }
+
+  .fact strong { font-size: 1.05rem; }
+
+  .notice {
+    min-height: 1.6em;
+    margin: 0 0 18px;
+    font-size: .94rem;
+    color: var(--teal);
+    font-weight: 650;
+    overflow-wrap: anywhere;
+  }
+
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(20px, 3.5vw, 36px);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    min-width: 0;
+  }
+
+  .panel-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  .panel-head p { margin-bottom: 0; }
+
+  .question {
+    font-size: clamp(1.05rem, 1.7vw, 1.22rem);
+    font-weight: 650;
+    line-height: 1.5;
+    max-width: 75ch;
+    margin-bottom: 12px;
+  }
+
+  label.field-label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .field-help {
+    display: block;
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: .87rem;
+  }
+
+  textarea, input[type="number"], input[type="text"], select {
+    color: var(--ink);
+    border: 1px solid #849a98;
+    background: #fcfdfa;
+    border-radius: 10px;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 110px;
+    padding: 12px;
+    resize: vertical;
+    line-height: 1.55;
+  }
+
+  input[type="number"], input[type="text"], select {
+    min-height: 46px;
+    padding: 9px 11px;
+    max-width: 100%;
+  }
+
+  input[type="number"] { width: 165px; }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Revised Commit a model */
+
+  .commit-intro {
+    max-width: 80ch;
+    margin-bottom: 24px;
+  }
+
+  .commit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .commit-card {
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: clamp(18px, 2.5vw, 26px);
+    background: #fcfdfa;
+  }
+
+  .commit-card.prediction-card {
+    background: #f0f7f1;
+    border-top: 4px solid var(--teal);
+  }
+
+  .commit-card.equation-card {
+    border-top: 4px solid var(--orange);
+  }
+
+  .card-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 17px;
+  }
+
+  .letter {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+    font-size: .86rem;
+    font-weight: 800;
+    flex: none;
+  }
+
+  .card-kicker h3 { margin: 0; }
+
+  .pressure-field {
+    min-width: 0;
+    border: 0;
+    margin: 0 0 22px;
+    padding: 0;
+  }
+
+  .pressure-field legend {
+    padding: 0;
+    width: 100%;
+  }
+
+  .radio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin: 13px 0;
+  }
+
+  .radio-choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 11px 12px;
+    border: 1px solid #aabdb4;
+    background: white;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: 650;
+    line-height: 1.35;
+    min-width: 0;
+  }
+
+  .radio-choice:last-child { grid-column: 1 / -1; }
+
+  .radio-choice.selected {
+    background: var(--teal-soft);
+    border: 2px solid var(--teal);
+    padding: 10px 11px;
+  }
+
+  .radio-choice:focus-within {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .radio-choice input:focus-visible { outline-offset: 2px; }
+
+  .commit-card .field { margin-top: 20px; }
+
+  .commit-card select,
+  .commit-card input[type="text"],
+  .commit-card input[type="number"] {
+    width: 100%;
+  }
+
+  .commit-card textarea {
+    min-height: 88px;
+    background: white;
+  }
+
+  .commit-card textarea.reason-field { min-height: 118px; }
+
+  .rule-chip {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 11px 13px;
+    background: var(--paper);
+    font-size: .9rem;
+    margin: 0 0 17px;
+  }
+
+  .symbol-key {
+    font-size: .87rem;
+    margin-top: 18px;
+  }
+
+  .symbol-key dl { margin: 0; }
+
+  .symbol-key dt {
+    font-weight: 750;
+    margin-top: 8px;
+  }
+
+  .symbol-key dd {
+    margin: 1px 0 0;
+    color: var(--muted);
+  }
+
+  .commit-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 23px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .commit-footer p {
+    max-width: 49ch;
+    margin: 0;
+  }
+
+  .inline-error {
+    color: var(--danger);
+    background: #fff1eb;
+    border: 1px solid #d5a294;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin: 18px 0 0;
+    font-weight: 650;
+  }
+
+  .oral-route {
+    border-top: 1px dashed var(--line);
+    margin-top: 25px;
+    padding-top: 20px;
+  }
+
+  .oral-route p { max-width: 80ch; }
+
+  /* Observe and experiment */
+
+  .control-deck {
+    display: grid;
+    grid-template-columns: minmax(250px, .9fr) minmax(0, 1.5fr);
+    gap: 24px;
+    padding: 20px;
+    border-radius: 15px;
+    background: var(--paper);
+    margin-bottom: 22px;
+  }
+
+  .volume-form .actions { align-items: end; }
+  .volume-form label { margin-bottom: 6px; }
+
+  .preset-row { margin-top: 12px; }
+
+  .preset-row button {
+    font-size: .86rem;
+    padding: 8px 11px;
+    border-color: var(--line);
+  }
+
+  .applied {
+    margin: 11px 0 0;
+    font-size: .9rem;
+    font-weight: 700;
+  }
+
+  .playback-controls .actions { margin-bottom: 13px; }
+
+  .speed-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: .9rem;
+  }
+
+  .speed-row select { width: 100px; }
+
+  .motion-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    padding: 6px 11px;
+    border-radius: 100px;
+    font-size: .83rem;
+    font-weight: 750;
+    background: var(--paper);
+  }
+
+  .sim-frame {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fcfdfa;
+  }
+
+  #gasCanvas {
+    display: block;
+    width: 100%;
+    height: clamp(440px, 43vw, 510px);
+  }
+
+  .diagram-caption {
+    padding: 14px 18px;
+    font-size: .85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    margin: 0;
+  }
+
+  .apparatus-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .apparatus-key span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .key-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: inline-block;
+  }
+
+  .key-transit {
+    background: var(--ink);
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+
+  .key-tick {
+    display: inline-block;
+    width: 17px;
+    border-top: 3px dashed var(--ink);
+  }
+
+  .observation-note {
+    padding: 15px 17px;
+    background: #eef3ec;
+    border-left: 4px solid var(--teal);
+    border-radius: 0 10px 10px 0;
+    margin: 16px 0;
+    font-size: .94rem;
+  }
+
+  .readouts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0 12px;
+  }
+
+  .readout {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    min-width: 0;
+  }
+
+  .readout.one {
+    background: var(--teal-soft);
+    border-top: 4px solid var(--teal);
+  }
+
+  .readout.two {
+    background: var(--orange-soft);
+    border-top: 4px solid var(--orange);
+  }
+
+  .readout h3 { margin-bottom: 9px; }
+
+  .readout dl {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 8px 16px;
+    margin: 0;
+  }
+
+  .readout dt {
+    color: var(--muted);
+    font-size: .86rem;
+  }
+
+  .readout dd {
+    margin: 0;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+  }
+
+  .readout output { font-variant-numeric: tabular-nums; }
+
+  .readout .large {
+    font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  }
+
+  .inventory { margin: 17px 0 20px; }
+
+  .inventory-label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px;
+    font-size: .91rem;
+    margin-bottom: 8px;
+  }
+
+  .mole-bar {
+    height: 15px;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+    border-radius: 8px;
+    background: white;
+  }
+
+  .mole-bar .one { background: var(--teal); }
+
+  .mole-bar .two {
+    background: repeating-linear-gradient(
+      135deg,
+      var(--orange) 0,
+      var(--orange) 5px,
+      #dc8e64 5px,
+      #dc8e64 8px
+    );
+  }
+
+  .progress-block {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 17px 0;
+    margin-bottom: 22px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    font-weight: 700;
+  }
+
+  input[type="range"] {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin: 6px 0 0;
+    accent-color: var(--teal);
+    cursor: pointer;
+  }
+
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+    margin: 24px 0;
+  }
+
+  .chart-wrap, .compare-wrap {
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .chart-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 17px;
+    font-size: .86rem;
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .legend i {
+    display: inline-block;
+    width: 25px;
+    border-top: 3px solid var(--teal);
+  }
+
+  .legend .dashed {
+    border-color: var(--orange);
+    border-top-style: dashed;
+  }
+
+  .legend .target {
+    border-color: #53646a;
+    border-top-style: dotted;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    margin-bottom: 13px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .88rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .compare-table { min-width: 390px; }
+
+  th, td {
+    padding: 9px 7px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th { font-weight: 750; }
+  thead th { background: var(--paper); }
+
+  caption {
+    text-align: left;
+    color: var(--muted);
+    font-size: .83rem;
+    margin-bottom: 8px;
+  }
+
+  .compare-wrap .actions { gap: 7px; }
+
+  .compare-wrap button {
+    font-size: .85rem;
+    padding: 9px 11px;
+  }
+
+  .notebook {
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    margin-top: 25px;
+  }
+
+  .notebook textarea { margin-bottom: 15px; }
+
+  .record-dl { margin: 0; }
+
+  .record-dl dt {
+    font-weight: 750;
+    margin-top: 12px;
+  }
+
+  .record-dl dd {
+    margin: 4px 0 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .record-text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font: inherit;
+    padding: 17px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fafbf7;
+  }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+  }
+
+  .reference {
+    margin-top: 20px;
+    padding: 22px;
+    border: 1px solid #9fb79f;
+    border-radius: 14px;
+    background: #f0f5e8;
+  }
+
+  .equation {
+    padding: 12px 14px;
+    margin: 11px 0;
+    border-left: 3px solid var(--teal);
+    background: white;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: .95rem;
+    overflow-wrap: anywhere;
+  }
+
+  .reference ul { padding-left: 22px; }
+  .technical { margin-top: 22px; }
+
+  .technical li {
+    margin: 7px 0;
+    overflow-wrap: anywhere;
+  }
+
+  .test-pass { color: var(--teal); }
+  .test-fail { color: var(--danger); }
+
+  .data-panel {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #e9eee8;
+  }
+
+  .data-panel h2 { font-size: 1.35rem; }
+
+  .data-panel p {
+    max-width: 95ch;
+    margin-bottom: 15px;
+  }
+
+  .data-panel details { margin-top: 18px; }
+
+  .fatal {
+    white-space: pre-wrap;
+    border: 2px solid var(--danger);
+    background: #fff0ea;
+  }
+
+  .print-only { display: none; }
+
+  .presentation .readout .large {
+    font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+  }
+
+  @media (max-width: 950px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .control-deck, .analysis-grid { grid-template-columns: 1fr; }
+    .hero-copy { max-width: 90ch; }
+    .topbar { gap: 10px; }
+  }
+
+  @media (max-width: 760px) {
+    .commit-grid { grid-template-columns: 1fr; }
+    .commit-footer { align-items: stretch; }
+    .commit-footer button { width: 100%; }
+  }
+
+  @media (max-width: 620px) {
+    main { padding-top: 28px; }
+    .brand { width: 100%; }
+    .teacher-toggle { width: 100%; }
+    .topbar > button { flex: 1; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .review-grid { grid-template-columns: 1fr; }
+
+    .stage-rail li {
+      display: block;
+      padding: 12px 10px;
+      font-size: .82rem;
+      line-height: 1.4;
+    }
+
+    .stage-rail b {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .panel {
+      padding: 20px 16px;
+      border-radius: 16px;
+    }
+
+    .commit-card { padding: 18px 14px; }
+
+    .radio-grid {
+      gap: 8px;
+    }
+
+    .radio-choice {
+      padding: 11px 9px;
+      gap: 7px;
+      font-size: .94rem;
+    }
+
+    .radio-choice.selected { padding: 10px 8px; }
+
+    .control-deck {
+      padding: 15px;
+      gap: 20px;
+    }
+
+    .readouts { grid-template-columns: 1fr; }
+    .readout .large { font-size: 1.5rem; }
+    .actions > button { flex-grow: 1; }
+
+    .chart-wrap, .compare-wrap { padding: 14px 11px; }
+    .reference { padding: 17px 13px; }
+    .data-panel { padding: 20px 16px; }
+
+    #gasCanvas { height: 440px; }
+    .diagram-caption { padding: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @media print {
+    @page { size: A4; margin: 16mm; }
+
+    body {
+      background: white;
+      color: black;
+      font-size: 10.5pt;
+      line-height: 1.4;
+    }
+
+    body > :not(#printWorksheet) { display: none !important; }
+    #printWorksheet { display: block !important; }
+
+    #printWorksheet h1 {
+      font-size: 23pt;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 10px;
+    }
+
+    #printWorksheet h2 {
+      font-size: 15pt;
+      margin-top: 18px;
+    }
+
+    #printWorksheet p { margin-bottom: 9px; }
+    #printWorksheet table { font-size: 10pt; }
+
+    #printWorksheet th, #printWorksheet td {
+      color: black;
+      border-color: #999;
+      padding: 6px;
+    }
+
+    #printWorksheet .rule {
+      height: 21px;
+      border-bottom: 1px solid #aaa;
+    }
+
+    #printWorksheet .worksheet-check {
+      break-before: page;
+      page-break-before: always;
+    }
+
+    #printWorksheet .print-note { font-size: 9pt; }
+
+    #printWorksheet .print-options {
+      padding: 8px 11px;
+      border: 1px solid #aaa;
+      margin: 8px 0 12px;
+    }
+  }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to learning activity</a>
+
+<header class="topbar">
+  <div class="brand">
+    <svg viewBox="0 0 60 46" aria-hidden="true">
+      <rect x="2" y="5" width="21" height="36" rx="7"
+            fill="#e2f2ec" stroke="#08675f" stroke-width="2"/>
+      <rect x="37" y="5" width="21" height="36" rx="7"
+            fill="#fff0e7" stroke="#ac3e22" stroke-width="2"/>
+      <path d="M23 20h14M23 26h14M30 16v14"
+            fill="none" stroke="#142f38" stroke-width="2"/>
+      <circle cx="10" cy="16" r="2.1" fill="#08675f"/>
+      <circle cx="16" cy="28" r="2.1" fill="#08675f"/>
+      <circle cx="46" cy="22" r="2.1" fill="#ac3e22"/>
+    </svg>
+    <div>
+      <strong id="brandTitle">Gas exchange challenge</strong>
+      <small id="brandCourse">Physics / Form 5</small>
+    </div>
+  </div>
+
+  <label class="teacher-toggle">
+    <input id="teacherMode" type="checkbox">
+    Teacher presentation
+  </label>
+
+  <button id="printWorksheetBtn" class="quiet" type="button">
+    Print worksheet
+  </button>
+
+  <button id="exportBriefBtn" class="quiet" type="button">
+    Export teaching brief
+  </button>
+</header>
+
+<main id="main">
+  <section id="heroBlock" class="hero" aria-label="Activity introduction">
+    <div>
+      <p id="courseLine" class="eyebrow">Physics / Form 5 / Ideal-gas modelling</p>
+      <h1>One valve.<br><span>Two temperatures.</span></h1>
+    </div>
+
+    <div class="hero-copy">
+      <p class="eyebrow">C1 / Shared learning goal</p>
+      <p id="c1Text"></p>
+      <p class="model-note" id="modelScaleNote"></p>
+
+      <details>
+        <summary>Model assumptions and limits</summary>
+        <ul id="assumptionsList"></ul>
+        <p class="small muted">
+          The ideal-gas model determines the final state.
+          Playback illustrates net redistribution; it does not predict real filling time.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <ol class="stage-rail" aria-label="Learning sequence">
+    <li id="stage1" aria-current="step">
+      <b>01</b><span>Commit a model</span>
+    </li>
+    <li id="stage2">
+      <b>02</b><span>Observe &amp; compare</span>
+    </li>
+    <li id="stage3">
+      <b>03</b><span>Check &amp; revise</span>
+    </li>
+  </ol>
+
+  <section id="factsBlock" class="facts" aria-label="Fixed conditions"></section>
+
+  <p id="notice" class="notice" role="status" aria-live="polite"></p>
+
+  <section id="fatalPanel" class="panel fatal" hidden>
+    <h2>Configuration needs attention</h2>
+    <p id="fatalMessage"></p>
+  </section>
+
+  <!-- REVISED COMMIT EXPERIENCE -->
+  <section id="predictPanel" class="panel" aria-labelledby="predictHeading">
+    <p class="eyebrow">01 / Think before opening the valve</p>
+    <h2 id="predictHeading" tabindex="-1">Start with your idea.</h2>
+
+    <p class="commit-intro">
+      You do not need a perfect answer yet.
+      Choose a pressure, predict how the gas will be shared, then sketch
+      your equations. We will keep this first model so you can compare it
+      with your evidence later.
+    </p>
+
+    <form id="predictForm" novalidate>
+      <div class="commit-grid">
+        <section class="commit-card prediction-card"
+                 aria-labelledby="predictionCardHeading">
+          <div class="card-kicker">
+            <span class="letter" aria-hidden="true">A</span>
+            <h3 id="predictionCardHeading">Make a prediction</h3>
+          </div>
+
+          <fieldset class="pressure-field">
+            <legend id="q1Text" class="question"></legend>
+
+            <p id="q1Help" class="small muted">
+              Choose the design target stated in the challenge.
+              This is not necessarily the result for every V₂.
+              Your choice is recorded, not marked.
+            </p>
+
+            <div id="pressureChoices" class="radio-grid"></div>
+
+            <div id="otherPressureWrap" hidden>
+              <label class="field-label" for="otherPressure">
+                Write your pressure prediction
+              </label>
+              <input id="otherPressure" type="text" maxlength="4000"
+                     placeholder="Use your own words or symbols."
+                     disabled>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label id="molePromptLabel" class="field-label" for="molePrediction"></label>
+            <select id="molePrediction" required></select>
+            <span class="field-help">
+              It is fine to be unsure. Keep your prediction separate from your explanation.
+            </span>
+          </div>
+
+          <div class="field">
+            <label id="guessPromptLabel" class="field-label" for="initialGuess"></label>
+            <input id="initialGuess" type="number" inputmode="decimal"
+                   step="any" placeholder="Your estimate, if you have one">
+            <span id="guessHelp" class="field-help"></span>
+          </div>
+        </section>
+
+        <section class="commit-card equation-card"
+                 aria-labelledby="equationCardHeading">
+          <div class="card-kicker">
+            <span class="letter" aria-hidden="true">B</span>
+            <h3 id="equationCardHeading">Build your first model</h3>
+          </div>
+
+          <p class="rule-chip">
+            <strong>Available model rule:</strong> PV = nRT.
+            Use absolute temperature in kelvin.
+          </p>
+
+          <div class="field">
+            <label id="pressurePromptLabel" class="field-label" for="pressureSetup"></label>
+            <textarea id="pressureSetup" required maxlength="4000"
+                      placeholder="Write your own relation for each final vessel."></textarea>
+            <span class="field-help">
+              You may use symbols, words, or a combination of both.
+            </span>
+          </div>
+
+          <div class="field">
+            <label id="molesPromptLabel" class="field-label" for="moleSetup"></label>
+            <textarea id="moleSetup" required maxlength="4000"
+                      placeholder="Write your own relation for the amounts of gas."></textarea>
+          </div>
+
+          <div class="field">
+            <label id="reasonPromptLabel" class="field-label" for="pReason"></label>
+            <textarea id="pReason" class="reason-field" required maxlength="4000"
+                      placeholder="Explain your choices. If you are unsure, explain what you are unsure about."></textarea>
+          </div>
+
+          <details class="symbol-key">
+            <summary>Need help reading the symbols?</summary>
+            <dl>
+              <dt>p</dt>
+              <dd>The initial absolute pressure in vessel 1.</dd>
+              <dt>P₁,f and P₂,f</dt>
+              <dd>The final pressure in vessel 1 and vessel 2.</dd>
+              <dt>n₁,f and n₂,f</dt>
+              <dd>The final amount of gas in each vessel, measured in mol.</dd>
+              <dt>V₁, V₂, T₁ and T₂</dt>
+              <dd>The volume and absolute temperature of the two vessels.</dd>
+              <dt>R</dt>
+              <dd>The molar gas constant.</dd>
+            </dl>
+          </details>
+        </section>
+      </div>
+
+      <p id="predictionError" class="inline-error" role="alert" hidden></p>
+
+      <div class="commit-footer">
+        <p class="small muted">
+          Your first response will be preserved.
+          Completing the form does not mean that your model is correct.
+        </p>
+        <button class="primary" type="submit">
+          Keep my prediction &amp; open the lab →
+        </button>
+      </div>
+    </form>
+
+    <div id="oralRoute" class="oral-route" hidden>
+      <h3>Teacher presentation route</h3>
+      <p class="small">
+        Ask Q1 and invite a reason and separate equation setups orally
+        before unlocking. Written fields may remain incomplete.
+        This records a teacher-reported discussion, not verified
+        independent individual work.
+      </p>
+
+      <label class="check-label">
+        <input id="oralConfirm" type="checkbox">
+        I report that the oral first attempt has taken place.
+      </label>
+
+      <button id="oralUnlock" class="accent" type="button" disabled>
+        Unlock after oral first attempt
+      </button>
+    </div>
+  </section>
+
+  <!-- REVISED OBSERVE APPARATUS -->
+  <section id="labPanel" class="panel" aria-labelledby="labHeading" hidden>
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">02 / One scientific variable: V₂</p>
+        <h2 id="labHeading" tabindex="-1">Watch the gas redistribute.</h2>
+        <p class="small muted">
+          Change V₂, then open the valve.
+          V₁, both temperatures and the total amount of gas remain fixed.
+        </p>
+      </div>
+      <span id="simStatus" class="tag">Valve closed</span>
+    </div>
+
+    <div class="control-deck">
+      <div>
+        <form id="volumeForm" class="volume-form" novalidate>
+          <label class="field-label" for="volumeInput">
+            Vessel 2 volume / cm³
+          </label>
+          <div class="actions">
+            <input id="volumeInput" type="number" inputmode="decimal"
+                   step="any" required aria-describedby="volumeHelp">
+            <button class="primary" type="submit">
+              Apply V₂ &amp; reset trial
+            </button>
+          </div>
+          <span id="volumeHelp" class="field-help"></span>
+        </form>
+
+        <p id="appliedVolume" class="applied"></p>
+        <div id="presetButtons" class="actions preset-row"></div>
+      </div>
+
+      <div class="playback-controls">
+        <div class="actions">
+          <button id="openValveBtn" class="primary" type="button">
+            Open valve &amp; start
+          </button>
+          <button id="playBtn" class="accent" type="button" disabled>
+            Pause
+          </button>
+          <button id="stepBtn" type="button" disabled>
+            Advance 10%
+          </button>
+          <button id="finalBtn" type="button">
+            Show equal-pressure endpoint
+          </button>
+          <button id="resetTrialBtn" class="quiet" type="button">
+            Reset trial
+          </button>
+        </div>
+
+        <div class="speed-row">
+          <label for="speedSelect">Playback speed</label>
+          <select id="speedSelect"></select>
+
+          <label class="motion-control">
+            <input id="reduceMotion" type="checkbox">
+            Reduce particle motion
+          </label>
+        </div>
+
+        <p id="motionMessage" class="small muted" style="margin:8px 0 0"></p>
+      </div>
+    </div>
+
+    <div class="sim-frame">
+      <canvas id="gasCanvas" role="img"
+              aria-label="Two-vessel gas-exchange schematic. Numerical state is provided below.">
+        Two vessels connected by a valve. Use the numerical readouts below.
+      </canvas>
+
+      <div class="diagram-caption">
+        <div class="apparatus-key" aria-label="Diagram key">
+          <span><i class="key-dot" aria-hidden="true"></i>Gas packet</span>
+          <span><i class="key-dot key-transit" aria-hidden="true"></i>Packet in transit</span>
+          <span><i class="key-tick" aria-hidden="true"></i>Target pressure tick</span>
+        </div>
+        <p id="particleNote" style="margin:0"></p>
+      </div>
+    </div>
+
+    <p id="observedState" class="observation-note"></p>
+
+    <div class="readouts" aria-label="Current numerical state">
+      <section class="readout one" aria-labelledby="vessel1Heading">
+        <h3 id="vessel1Heading">Vessel 1 · cool reservoir</h3>
+        <dl>
+          <div>
+            <dt>Pressure P₁</dt>
+            <dd class="large"><output id="readP1"></output></dd>
+          </div>
+          <div>
+            <dt>Amount n₁</dt>
+            <dd class="large"><output id="readN1"></output></dd>
+          </div>
+          <div>
+            <dt>Fixed volume</dt>
+            <dd id="readV1"></dd>
+          </div>
+          <div>
+            <dt>Fixed temperature</dt>
+            <dd id="readT1"></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="readout two" aria-labelledby="vessel2Heading">
+        <h3 id="vessel2Heading">Vessel 2 · warm reservoir</h3>
+        <dl>
+          <div>
+            <dt>Pressure P₂</dt>
+            <dd class="large"><output id="readP2"></output></dd>
+          </div>
+          <div>
+            <dt>Amount n₂</dt>
+            <dd class="large"><output id="readN2"></output></dd>
+          </div>
+          <div>
+            <dt>Applied volume</dt>
+            <dd id="readV2"></dd>
+          </div>
+          <div>
+            <dt>Fixed temperature</dt>
+            <dd id="readT2"></dd>
+          </div>
+        </dl>
+      </section>
+    </div>
+
+    <div class="inventory">
+      <div class="inventory-label">
+        <span><strong>System inventory</strong> · n₁ + n₂</span>
+        <strong id="totalMoles"></strong>
+      </div>
+      <div class="mole-bar" aria-hidden="true">
+        <div id="bar1" class="one"></div>
+        <div id="bar2" class="two"></div>
+      </div>
+      <p class="small muted" style="margin:8px 0 0">
+        Solid segment: vessel 1. Striped segment: vessel 2.
+        Here p always means the initial absolute pressure in vessel 1.
+      </p>
+    </div>
+
+    <div class="progress-block">
+      <div class="progress-label">
+        <label for="progress">Illustrative net-transfer progress</label>
+        <output id="progressValue" for="progress">0%</output>
+      </div>
+      <input id="progress" type="range" min="0" max="1000" step="1" value="0">
+      <p class="small muted" style="margin-bottom:0">
+        Dragging pauses playback and selects an earlier or later model state.
+        This is not a prediction of reverse flow or real elapsed time.
+        100% means equal pressure for the applied V₂—not necessarily the design target.
+      </p>
+    </div>
+
+    <div class="analysis-grid">
+      <section class="chart-wrap" aria-labelledby="chartHeading">
+        <h3 id="chartHeading">Two pressures, one endpoint</h3>
+
+        <div class="legend">
+          <span><i aria-hidden="true"></i>Vessel 1 · solid</span>
+          <span><i class="dashed" aria-hidden="true"></i>Vessel 2 · dashed</span>
+          <span><i class="target" aria-hidden="true"></i>Design target</span>
+        </div>
+
+        <svg id="pressurePlot" viewBox="0 0 600 225" role="img"
+             aria-labelledby="plotTitle plotDesc">
+          <title id="plotTitle">
+            Pressure ratios against illustrative transfer progress
+          </title>
+          <desc id="plotDesc"></desc>
+          <g id="plotContent"></g>
+        </svg>
+
+        <p class="small muted" style="margin-bottom:0">
+          Only the visited path is drawn.
+          The redistribution path is chosen for teaching; it is not measured flow data.
+        </p>
+      </section>
+
+      <section class="compare-wrap" aria-labelledby="compareHeading">
+        <h3 id="compareHeading">A / B · compare final states</h3>
+
+        <div class="table-scroll" tabindex="0"
+             aria-label="Scrollable A and B comparison table">
+          <table class="compare-table">
+            <caption>
+              Final states only. All scientific conditions except V₂ are identical.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Quantity</th>
+                <th scope="col">A</th>
+                <th scope="col">B</th>
+              </tr>
+            </thead>
+            <tbody id="ABbody"></tbody>
+          </table>
+        </div>
+
+        <div class="actions">
+          <button id="saveA" type="button">Save final state as A</button>
+          <button id="saveB" type="button">Save final state as B</button>
+          <button id="loadA" class="quiet" type="button">Run A again</button>
+          <button id="loadB" class="quiet" type="button">Run B again</button>
+          <button id="clearAB" class="quiet" type="button">Clear A / B</button>
+        </div>
+
+        <p id="ABnote" class="small muted" style="margin:12px 0 0"></p>
+      </section>
+    </div>
+
+    <details>
+      <summary>Your first model · preserved, not overwritten</summary>
+      <dl id="firstAttemptLab" class="record-dl"></dl>
+    </details>
+
+    <details>
+      <summary>Discussion prompts for the observation stage</summary>
+      <ul id="discussion"></ul>
+    </details>
+
+    <div class="notebook">
+      <label class="field-label" for="evidence">
+        Your observation / evidence record
+      </label>
+      <textarea id="evidence" maxlength="4000"
+                placeholder="Record useful pressure and mole values. Explain what your trial or A/B comparison shows."></textarea>
+
+      <p class="small muted">
+        Matching a target or operating the controls does not prove understanding.
+        Your equations and explanation are the learning evidence.
+      </p>
+
+      <button id="beginCheck" class="primary" type="button">
+        Start independent Q2
+      </button>
+      <p id="checkGate" class="small muted" style="margin:10px 0 0"></p>
+    </div>
+  </section>
+
+  <section id="checkPanel" class="panel" aria-labelledby="checkHeading" hidden>
+    <p class="eyebrow">03 / Independent check</p>
+    <h2 id="checkHeading" tabindex="-1">Q2 · Your own equation.</h2>
+
+    <p id="q2Text" class="question"></p>
+
+    <p class="small muted">
+      The experiment and earlier notes are hidden on this screen.
+      No new hints are provided.
+      A self-report cannot establish independent completion.
+    </p>
+
+    <form id="q2Form" novalidate>
+      <label class="field-label" for="q2Answer">Your Q2 answer</label>
+      <textarea id="q2Answer" required maxlength="4000"></textarea>
+
+      <label class="check-label">
+        <input id="q2Claim" type="checkbox">
+        I report that I completed this answer without help.
+      </label>
+
+      <div class="actions" style="margin-top:16px">
+        <button class="primary" type="submit">Record Q2 answer</button>
+        <button id="returnLabFromCheck" class="quiet" type="button">
+          Return to experiment · consultation will be recorded
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section id="reviewPanel" class="panel" aria-labelledby="reviewHeading" hidden>
+    <p class="eyebrow">03 / Preserve, compare, revise</p>
+    <h2 id="reviewHeading" tabindex="-1">Keep the answer. Add the revision.</h2>
+
+    <div class="review-grid">
+      <div>
+        <h3>Your recorded Q2 answer · locked</h3>
+        <pre id="q2Recorded" class="record-text"></pre>
+        <p id="q2RecordNote" class="small muted"></p>
+      </div>
+      <div>
+        <h3>Evidence retained when Q2 first opened</h3>
+        <pre id="evidenceAtCheck" class="record-text"></pre>
+        <p class="small muted">
+          Later notebook edits do not replace this earlier evidence snapshot.
+        </p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Your first model · read-only</summary>
+      <dl id="firstAttemptReview" class="record-dl"></dl>
+    </details>
+
+    <div class="notebook">
+      <label class="field-label" for="revision">
+        Your revision / explanation of any change
+      </label>
+      <textarea id="revision" maxlength="4000"
+                placeholder="Keep your original answers intact. Explain what you would now change and why."></textarea>
+
+      <div class="actions">
+        <button id="backToLab" class="quiet" type="button">
+          Return to experiment
+        </button>
+        <button id="showReference" class="accent" type="button">
+          Reveal teacher reference · after Q2
+        </button>
+      </div>
+    </div>
+
+    <div id="referencePanel" class="reference" hidden></div>
+
+    <details class="technical">
+      <summary>Teacher / technical model checks</summary>
+      <p class="small muted">
+        These assertions run only when requested in this browser.
+        They check numerical and packet-endpoint relationships,
+        not layout, accessibility or student mastery.
+      </p>
+      <button id="runChecks" type="button">
+        Run model assertions in this browser
+      </button>
+      <ul id="testResults"></ul>
+    </details>
+  </section>
+
+  <section id="dataPanel" class="data-panel" aria-labelledby="dataHeading">
+    <h2 id="dataHeading">Keep your work, on your terms.</h2>
+
+    <p class="small">
+      Work stays in this page’s memory unless you explicitly save or export it.
+      No name or student number is requested. No data is sent over a network.
+      Reloading or closing the page loses unsaved work.
+    </p>
+
+    <div class="actions">
+      <button id="saveLocal" type="button">Save / replace local copy</button>
+      <button id="loadLocal" type="button">Load local copy</button>
+      <button id="exportRecord" type="button">Export learner record · JSON</button>
+      <button id="clearLocal" class="quiet" type="button">
+        Delete local saved copy
+      </button>
+      <button id="startOver" class="quiet" type="button">
+        Clear current work &amp; start over
+      </button>
+    </div>
+
+    <details>
+      <summary>Storage, export and independence limits</summary>
+      <ul class="small">
+        <li>There is no automatic saving or automatic restoration.</li>
+        <li>The local save contains one copy for this version of the activity. A new save replaces it.</li>
+        <li>Browser-local storage may be blocked, cleared, or behave differently for a file opened directly from disk.</li>
+        <li>Downloaded JSON is unencrypted. This page restores its own local save; it does not import downloaded files.</li>
+        <li>The page cannot verify that a download or printed document was successfully saved.</li>
+        <li>Other users of the same browser profile may be able to read local work. Deleting the local copy does not delete downloads.</li>
+        <li>Returning to the experiment during Q2 is recorded. Other help cannot be detected. This is not a secure examination system.</li>
+        <li>Worksheet printing, teaching-brief export, learner-record export and local restoration are disabled while the Q2 screen is open.</li>
+        <li>This revision uses a separate v2 storage key. It does not automatically restore or delete earlier v1 records.</li>
+      </ul>
+    </details>
+  </section>
+
+  <noscript>
+    <p class="model-note">JavaScript is required for this interactive model.</p>
+  </noscript>
+</main>
+
+<section id="printWorksheet" class="print-only"
+         aria-label="Shared printable worksheet"></section>
+
+<script>
+(() => {
+  "use strict";
+
+  /*
+   * ============================================================
+   * TEACHER CONFIGURATION
+   * ============================================================
+   *
+   * Edit CONFIG, save the HTML, then reload.
+   *
+   * During a learner trial, V2 is the only editable scientific
+   * condition. Playback speed and reduced motion affect display
+   * only.
+   *
+   * C1, Q1 and Q2 are shared by the page, worksheet and bot brief.
+   * The brief is an offline export, not a connected AI service.
+   */
+
+  const CONFIG = {
+    subject: "Physics",
+    audience: "Form 5",
+    activity: "Gas exchange challenge",
+    language: "English",
+
+    physics: {
+      V1cm3: 10,
+      n0mol: 10,
+      T1C: 20,
+      T2C: 60,
+      R: 8.31446261815324,
+      targetFraction: 0.5
+    },
+
+    volume: {
+      min: 0.1,
+      max: 100,
+      initial: 10,
+      presets: [5, 10, 15, 20]
+    },
+
+    playback: {
+      durationMs: 16000,
+      stepProgress: 0.1,
+      speeds: [0.5, 1, 2]
+    },
+
+    visual: {
+      packetCount: 100,
+      pressureDigits: 4,
+      moleDigits: 4,
+      minimumTravelWindow: 0.07,
+      maximumTravelWindow: 0.18
+    },
+
+    storage: {
+      key: "gas-exchange-challenge.v2",
+      maxTrials: 12,
+      maxRecordCharacters: 250000
+    },
+
+    teaching: {
+      c1Template:
+        "Use the ideal gas law, equal final pressures and conservation of total moles to determine V₂ for two rigid vessels: vessel 1 has volume {V1} cm³, initially contains {n0} mol, and is maintained at {T1} °C; vessel 2 is initially evacuated and is maintained at {T2} °C. Find V₂ so that the final pressure in each vessel is {target}, where p is the initial pressure in vessel 1.",
+
+      q1:
+        "What should be the final pressure in both vessel in terms of p (the start pressure in vessel 1)?",
+
+      q2:
+        "Under the concept of final pressure, can you set the equation for the total number of mole?",
+
+      commit: {
+        molePrompt:
+          "For the target final pressure, how do you expect the gas to be shared?",
+
+        guessPrompt:
+          "Your first estimate of V₂ / cm³ (optional)",
+
+        pressurePrompt:
+          "1 · Final-pressure relation(s)",
+
+        molesPrompt:
+          "2 · Total-moles relation",
+
+        reasonPrompt:
+          "3 · Why does your model make sense?",
+
+        pressureChoices: [
+          { id: "initial", label: "p" },
+          { id: "half", label: "p / 2" },
+          { id: "quarter", label: "p / 4" },
+          { id: "unequal", label: "P₁,f ≠ P₂,f" },
+          { id: "other", label: "A different answer / my own expression" }
+        ],
+
+        moleChoices: [
+          { id: "equal", label: "The same amount in both vessels" },
+          { id: "more-left", label: "More gas remains in vessel 1" },
+          { id: "more-right", label: "More gas ends up in vessel 2" },
+          { id: "less-total", label: "The system has less gas in total" },
+          { id: "unsure", label: "I am not sure yet" }
+        ]
+      },
+
+      correctedOutcome:
+        "The learner writes a pressure relation for each vessel and a conserved total-moles relation, distinguishes the amount in one vessel from the amount in the whole system, and justifies the mole split for the specified target.",
+
+      assumptions: [
+        "Both rigid vessels contain the same ideal gas. The combined system does not leak.",
+        "Separate heat reservoirs maintain the stated temperature in each vessel.",
+        "The connecting tube has negligible volume. Each vessel is treated as internally uniform.",
+        "The specified final state has equal absolute pressure in the two vessels; their temperatures remain different.",
+        "The gas can exchange heat with the reservoirs, so its own energy need not remain constant.",
+        "Real filling transients, finite thermalisation, molecular interactions, gravity and rarefied-gas thermal-transpiration effects are outside this model."
+      ],
+
+      discussion: [
+        "Compare two final states with different V₂. Which scientific conditions stayed fixed?",
+        "When the final pressures are equal, are the recorded amounts in the two vessels always equal?",
+        "Distinguish the amount in vessel 1, the amount in vessel 2 and the total amount in the system."
+      ]
+    }
+  };
+
+  const $ = id => document.getElementById(id);
+  const P = CONFIG.physics;
+  const T1 = P.T1C + 273.15;
+  const T2 = P.T2C + 273.15;
+
+  const motionQuery = typeof window.matchMedia === "function"
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+
+  let systemReducedMotion = motionQuery ? motionQuery.matches : false;
+  let SHARED;
+  let SIGNATURE;
+  let state;
+  let ctx = null;
+  let canvasWidth = 0;
+  let canvasHeight = 0;
+  let driftPhase = 0;
+  let lastFrame = 0;
+  let lastReadout = 0;
+
+  const COLORS = {
+    ink: "#142f38",
+    muted: "#4c6269",
+    line: "#cbd6d2",
+    teal: "#08675f",
+    tealSoft: "#e2f2ec",
+    orange: "#ac3e22",
+    orangeSoft: "#fff0e7",
+    background: "#fcfdfa"
+  };
+
+  const num = (value, digits = 3) =>
+    Number.isFinite(value)
+      ? value.toLocaleString("en-US", { maximumFractionDigits: digits })
+      : "—";
+
+  function fixed(value, digits) {
+    if (!Number.isFinite(value)) return "—";
+    const roundedValue =
+      Math.abs(value) < 0.5 * Math.pow(10, -digits) ? 0 : value;
+    return roundedValue.toFixed(digits);
+  }
+
+  const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+
+  const near = (a, b, tolerance = 1e-10) =>
+    Number.isFinite(a) &&
+    Number.isFinite(b) &&
+    Math.abs(a - b) <= tolerance * Math.max(1, Math.abs(a), Math.abs(b));
+
+  const pressureText = value =>
+    `${fixed(value, CONFIG.visual.pressureDigits)} p`;
+
+  const moleText = value =>
+    `${fixed(value, CONFIG.visual.moleDigits)} mol`;
+
+  function reducedMotion() {
+    return systemReducedMotion || state.reduceMotion;
+  }
+
+  function targetName() {
+    return near(P.targetFraction, 0.5)
+      ? "p/2"
+      : `${num(P.targetFraction, 6)}p`;
+  }
+
+  function initialPressure() {
+    return P.n0mol * P.R * T1 / (P.V1cm3 * 1e-6);
+  }
+
+  function targetVolume(q = P.targetFraction) {
+    if (!Number.isFinite(q) || q <= 0 || q >= 1) return null;
+    const volume = P.V1cm3 * (T2 / T1) * ((1 / q) - 1);
+    return Number.isFinite(volume) && volume > 0 ? volume : null;
+  }
+
+  /*
+   * Final state:
+   *   a = V1/T1
+   *   b = V2/T2
+   *   Pf/p = a/(a+b)
+   *
+   * Chosen teaching path:
+   *   n2(s) = s * n2(final)
+   *
+   * This path is not a measured or predictive flow-rate law.
+   * Both instantaneous pressure readouts satisfy PV = nRT.
+   */
+  function model(volume, progress) {
+    if (!Number.isFinite(volume) || volume <= 0) {
+      throw new Error("The model requires a positive, finite V₂.");
+    }
+
+    if (!Number.isFinite(progress) || progress < 0 || progress > 1) {
+      throw new Error("Transfer progress must lie between 0 and 1.");
+    }
+
+    const a = P.V1cm3 / T1;
+    const b = volume / T2;
+    const sum = a + b;
+
+    if (!Number.isFinite(sum) || a <= 0 || b <= 0 || sum <= 0) {
+      throw new Error("The configured values exceed the supported numerical range.");
+    }
+
+    const pf = a / sum;
+    const fraction2Final = b / sum;
+    const n2 = P.n0mol * fraction2Final * progress;
+    const n1 = P.n0mol - n2;
+
+    const result = {
+      n1,
+      n2,
+      p1: n1 / P.n0mol,
+      p2: pf * progress,
+      pf,
+      fraction2: n2 / P.n0mol
+    };
+
+    if (!Object.values(result).every(Number.isFinite)) {
+      throw new Error("The configured values produced a non-finite model state.");
+    }
+
+    return result;
+  }
+
+  function validVolume(raw) {
+    if (typeof raw === "string" && raw.trim() === "") {
+      throw new Error("Enter a volume for vessel 2.");
+    }
+
+    const value = typeof raw === "number" ? raw : Number(raw);
+
+    if (!Number.isFinite(value)) {
+      throw new Error("V₂ must be a finite number.");
+    }
+
+    if (value <= 0) {
+      throw new Error(
+        "V₂ must be greater than zero. A zero-volume vessel does not have a defined ideal-gas pressure in this activity."
+      );
+    }
+
+    if (value < CONFIG.volume.min || value > CONFIG.volume.max) {
+      throw new Error(
+        `Use V₂ from ${num(CONFIG.volume.min, 6)} to ${num(CONFIG.volume.max, 6)} cm³.`
+      );
+    }
+
+    return value;
+  }
+
+  function validateConfiguration() {
+    const errors = [];
+
+    function positive(value, label) {
+      if (!Number.isFinite(value) || value <= 0) {
+        errors.push(`${label} must be positive and finite.`);
+      }
+    }
+
+    positive(P.V1cm3, "V₁");
+    positive(P.n0mol, "Initial amount");
+    positive(P.R, "R");
+    positive(T1, "T₁ in kelvin");
+    positive(T2, "T₂ in kelvin");
+    positive(CONFIG.volume.min, "Minimum V₂");
+    positive(CONFIG.volume.max, "Maximum V₂");
+    positive(CONFIG.playback.durationMs, "Playback duration");
+
+    if (CONFIG.volume.max <= CONFIG.volume.min) {
+      errors.push("Maximum V₂ must be greater than minimum V₂.");
+    }
+
+    if (!Number.isFinite(CONFIG.volume.initial) ||
+        CONFIG.volume.initial < CONFIG.volume.min ||
+        CONFIG.volume.initial > CONFIG.volume.max) {
+      errors.push("Initial V₂ must lie inside the input range.");
+    }
+
+    if (!Array.isArray(CONFIG.volume.presets) ||
+        !CONFIG.volume.presets.every(v =>
+          Number.isFinite(v) &&
+          v >= CONFIG.volume.min &&
+          v <= CONFIG.volume.max)) {
+      errors.push("Every V₂ preset must lie inside the input range.");
+    }
+
+    if (!Number.isFinite(CONFIG.playback.stepProgress) ||
+        CONFIG.playback.stepProgress <= 0 ||
+        CONFIG.playback.stepProgress > 1) {
+      errors.push("The progress step must be greater than 0 and no greater than 1.");
+    }
+
+    if (!Array.isArray(CONFIG.playback.speeds) ||
+        !CONFIG.playback.speeds.includes(1) ||
+        !CONFIG.playback.speeds.every(v => Number.isFinite(v) && v > 0)) {
+      errors.push("Playback speeds must be positive finite values and include 1.");
+    }
+
+    if (!Number.isInteger(CONFIG.visual.packetCount) ||
+        CONFIG.visual.packetCount < 20 ||
+        CONFIG.visual.packetCount > 300) {
+      errors.push("Use an integer packet count from 20 to 300.");
+    }
+
+    for (const key of ["pressureDigits", "moleDigits"]) {
+      if (!Number.isInteger(CONFIG.visual[key]) ||
+          CONFIG.visual[key] < 0 ||
+          CONFIG.visual[key] > 6) {
+        errors.push(`${key} must be an integer from 0 to 6.`);
+      }
+    }
+
+    if (!Number.isFinite(CONFIG.visual.minimumTravelWindow) ||
+        !Number.isFinite(CONFIG.visual.maximumTravelWindow) ||
+        CONFIG.visual.minimumTravelWindow <= 0 ||
+        CONFIG.visual.maximumTravelWindow < CONFIG.visual.minimumTravelWindow ||
+        CONFIG.visual.maximumTravelWindow >= 1) {
+      errors.push("Packet travel windows must satisfy 0 < minimum ≤ maximum < 1.");
+    }
+
+    if (!Number.isInteger(CONFIG.storage.maxTrials) ||
+        CONFIG.storage.maxTrials < 1 ||
+        CONFIG.storage.maxTrials > 50) {
+      errors.push("Retain an integer number of trials from 1 to 50.");
+    }
+
+    if (!Number.isInteger(CONFIG.storage.maxRecordCharacters) ||
+        CONFIG.storage.maxRecordCharacters < 20000) {
+      errors.push("The record-size limit must be an integer of at least 20000.");
+    }
+
+    for (const key of ["c1Template", "q1", "q2", "correctedOutcome"]) {
+      if (typeof CONFIG.teaching[key] !== "string" ||
+          !CONFIG.teaching[key].trim()) {
+        errors.push(`Teaching text ${key} must not be blank.`);
+      }
+    }
+
+    for (const key of ["assumptions", "discussion"]) {
+      if (!Array.isArray(CONFIG.teaching[key]) ||
+          !CONFIG.teaching[key].every(v => typeof v === "string" && v.trim())) {
+        errors.push(`${key} must be an array of non-blank text.`);
+      }
+    }
+
+    for (const key of [
+      "molePrompt", "guessPrompt", "pressurePrompt", "molesPrompt", "reasonPrompt"
+    ]) {
+      if (typeof CONFIG.teaching.commit[key] !== "string" ||
+          !CONFIG.teaching.commit[key].trim()) {
+        errors.push(`Commit prompt ${key} must not be blank.`);
+      }
+    }
+
+    for (const key of ["pressureChoices", "moleChoices"]) {
+      const choices = CONFIG.teaching.commit[key];
+
+      if (!Array.isArray(choices) || choices.length === 0) {
+        errors.push(`${key} must contain at least one choice.`);
+        continue;
+      }
+
+      const ids = new Set();
+
+      for (const choice of choices) {
+        if (!choice ||
+            typeof choice.id !== "string" ||
+            !/^[a-z0-9-]+$/.test(choice.id) ||
+            typeof choice.label !== "string" ||
+            !choice.label.trim() ||
+            ids.has(choice.id)) {
+          errors.push(`${key} needs unique lowercase IDs and non-blank labels.`);
+          break;
+        }
+        ids.add(choice.id);
+      }
+
+      if (key === "pressureChoices" && !ids.has("other")) {
+        errors.push('Pressure choices must include an option with ID "other".');
+      }
+    }
+
+    const target = targetVolume();
+
+    if (target === null) {
+      errors.push(
+        "The target must have 0 < final-pressure fraction < 1 and a finite positive V₂ within the supported numerical range."
+      );
+    } else if (target < CONFIG.volume.min || target > CONFIG.volume.max) {
+      errors.push(
+        "The design target lies outside the permitted V₂ range. Extend the range or review the target before using this lesson."
+      );
+    }
+
+    if (errors.length) throw new Error(errors.join("\n"));
+
+    positive(initialPressure(), "Initial ideal-model pressure");
+    if (errors.length) throw new Error(errors.join("\n"));
+
+    for (const volume of [
+      CONFIG.volume.min, CONFIG.volume.initial, CONFIG.volume.max, target
+    ]) {
+      model(volume, 0);
+      model(volume, 0.5);
+      model(volume, 1);
+    }
+  }
+
+  function sharedTexts() {
+    const replacements = {
+      V1: num(P.V1cm3, 6),
+      n0: num(P.n0mol, 6),
+      T1: num(P.T1C, 6),
+      T2: num(P.T2C, 6),
+      target: targetName()
+    };
+
+    const C1 = CONFIG.teaching.c1Template.replace(/\{(\w+)\}/g, (_, key) => {
+      if (!(key in replacements)) {
+        throw new Error(`Unknown C1 template token: ${key}`);
+      }
+      return replacements[key];
+    });
+
+    return Object.freeze({
+      C1,
+      Q1: CONFIG.teaching.q1,
+      Q2: CONFIG.teaching.q2
+    });
+  }
+
+  function blankResponses() {
+    return {
+      pressureChoice: "",
+      pressureOther: "",
+      moleChoice: "",
+      guess: "",
+      pressure: "",
+      moles: "",
+      reason: ""
+    };
+  }
+
+  function blankState() {
+    return {
+      stage: "predict",
+      teacherMode: false,
+      draft: blankResponses(),
+      attempt: null,
+      v: CONFIG.volume.initial,
+      s: 0,
+      valveOpen: false,
+      speed: 1,
+      playing: false,
+      reduceMotion: false,
+      runRecorded: false,
+      trials: [],
+      slots: { A: null, B: null },
+      evidence: "",
+      checkEvidence: null,
+      q2Draft: "",
+      q2Claim: false,
+      consulted: false,
+      q2: null,
+      revision: "",
+      solutionSeen: false,
+      solutionVisible: false
+    };
+  }
+
+  function choiceLabel(group, id) {
+    const choice = CONFIG.teaching.commit[group].find(item => item.id === id);
+    return choice ? choice.label : "";
+  }
+
+  function pressureAnswer(responses) {
+    return responses.pressureChoice === "other"
+      ? responses.pressureOther.trim()
+      : choiceLabel("pressureChoices", responses.pressureChoice);
+  }
+
+  function announce(message) {
+    $("notice").textContent = message;
+  }
+
+  function focusPanel(id) {
+    const panel = $(id);
+    panel.scrollIntoView({ block: "start", behavior: "auto" });
+    const heading = panel.querySelector("h2");
+    if (heading) heading.focus({ preventScroll: true });
+  }
+
+  function captureInputs() {
+    const selected = document.querySelector('input[name="pressureChoice"]:checked');
+
+    state.draft = {
+      pressureChoice: selected ? selected.value : "",
+      pressureOther: $("otherPressure").value,
+      moleChoice: $("molePrediction").value,
+      guess: $("initialGuess").value,
+      pressure: $("pressureSetup").value,
+      moles: $("moleSetup").value,
+      reason: $("pReason").value
+    };
+
+    state.evidence = $("evidence").value;
+    state.revision = $("revision").value;
+
+    if (!state.q2) {
+      state.q2Draft = $("q2Answer").value;
+      state.q2Claim = $("q2Claim").checked;
+    }
+  }
+
+  function updateChoiceUI() {
+    const selected = document.querySelector('input[name="pressureChoice"]:checked');
+    const isOther = !!selected && selected.value === "other";
+
+    $("otherPressureWrap").hidden = !isOther;
+    $("otherPressure").disabled = !isOther;
+    $("otherPressure").required = isOther;
+
+    document.querySelectorAll(".radio-choice").forEach(label => {
+      const input = label.querySelector("input");
+      label.classList.toggle("selected", input.checked);
+    });
+  }
+
+  function hydrateInputs() {
+    document.querySelectorAll('input[name="pressureChoice"]').forEach(input => {
+      input.checked = input.value === state.draft.pressureChoice;
+    });
+
+    $("otherPressure").value = state.draft.pressureOther;
+    $("molePrediction").value = state.draft.moleChoice;
+    $("initialGuess").value = state.draft.guess;
+    $("pressureSetup").value = state.draft.pressure;
+    $("moleSetup").value = state.draft.moles;
+    $("pReason").value = state.draft.reason;
+    $("evidence").value = state.evidence;
+    $("q2Answer").value = state.q2Draft;
+    $("q2Claim").checked = state.q2Claim;
+    $("revision").value = state.revision;
+    $("volumeInput").value = String(state.v);
+    $("speedSelect").value = String(state.speed);
+    $("oralConfirm").checked = false;
+    $("predictionError").hidden = true;
+
+    for (const id of [
+      "otherPressure", "molePrediction", "initialGuess",
+      "pressureSetup", "moleSetup", "pReason",
+      "evidence", "q2Answer", "revision", "volumeInput"
+    ]) {
+      $(id).setCustomValidity("");
+    }
+
+    updateChoiceUI();
+  }
+
+  function requireNonBlank(ids) {
+    for (const id of ids) {
+      const field = $(id);
+      field.setCustomValidity(
+        field.value.trim() ? "" : "Write your own response before continuing."
+      );
+      if (!field.reportValidity()) return false;
+    }
+    return true;
+  }
+
+  function optionalGuess() {
+    const field = $("initialGuess");
+    field.setCustomValidity("");
+
+    if (field.validity.badInput) {
+      throw new Error("Enter a valid V₂ estimate, or leave the optional estimate blank.");
+    }
+
+    if (!field.value.trim()) return null;
+    return validVolume(field.value);
+  }
+
+  function predictionError(message, control) {
+    $("predictionError").textContent = message;
+    $("predictionError").hidden = false;
+    announce(message);
+    if (control) control.focus();
+  }
+
+  function validateWrittenAttempt() {
+    captureInputs();
+
+    if (!state.draft.pressureChoice) {
+      predictionError(
+        "Choose a pressure prediction first.",
+        document.querySelector('input[name="pressureChoice"]')
+      );
+      return false;
+    }
+
+    if (state.draft.pressureChoice === "other" &&
+        !requireNonBlank(["otherPressure"])) {
+      predictionError("Write your own pressure expression.");
+      return false;
+    }
+
+    if (!state.draft.moleChoice) {
+      predictionError(
+        "Choose a gas-sharing prediction. You may choose “I am not sure yet”.",
+        $("molePrediction")
+      );
+      return false;
+    }
+
+    if (!requireNonBlank(["pressureSetup", "moleSetup", "pReason"])) {
+      predictionError(
+        "Add your two equation attempts and a reason. An explanation of your uncertainty is also useful."
+      );
+      return false;
+    }
+
+    try {
+      optionalGuess();
+    } catch (error) {
+      $("initialGuess").setCustomValidity(error.message);
+      $("initialGuess").reportValidity();
+      predictionError(error.message);
+      return false;
+    }
+
+    $("predictionError").hidden = true;
+    return true;
+  }
+
+  function snapshot(volume) {
+    const m = model(volume, 1);
+    return {
+      volumeCm3: volume,
+      p1OverP: m.p1,
+      p2OverP: m.p2,
+      n1mol: m.n1,
+      n2mol: m.n2,
+      totalMol: m.n1 + m.n2
+    };
+  }
+
+  function recordFinalIfNeeded() {
+    if (state.s !== 1 || state.runRecorded) return;
+
+    state.trials.push(snapshot(state.v));
+    state.trials = state.trials.slice(-CONFIG.storage.maxTrials);
+    state.runRecorded = true;
+  }
+
+  function applyVolume(volume, message = "New V₂ applied.") {
+    if (!state.attempt) return;
+
+    state.v = validVolume(volume);
+    state.s = 0;
+    state.valveOpen = false;
+    state.playing = false;
+    state.runRecorded = false;
+    driftPhase = 0;
+
+    $("volumeInput").value = String(state.v);
+    $("volumeInput").setCustomValidity("");
+
+    renderLab();
+    announce(
+      `${message} The trial is reset with the valve closed. ` +
+      "Your first model, notes and A/B records are retained."
+    );
+  }
+
+  function setProgress(progress, speak = true) {
+    state.playing = false;
+    state.s = Math.max(0, Math.min(1, progress));
+
+    if (state.s > 0) state.valveOpen = true;
+
+    recordFinalIfNeeded();
+    renderLab();
+
+    if (speak) {
+      announce(state.s === 1
+        ? "Equal final pressures reached for this V₂. Read the amounts and compare; this is not an automatic assessment."
+        : `View paused at ${num(state.s * 100, 1)}% illustrative transfer progress.`);
+    }
+  }
+
+  function fillList(id, texts) {
+    const list = $(id);
+    list.replaceChildren();
+
+    for (const text of texts) {
+      const item = document.createElement("li");
+      item.textContent = text;
+      list.appendChild(item);
+    }
+  }
+
+  function renderAttempt(id) {
+    const container = $(id);
+    container.replaceChildren();
+
+    if (!state.attempt) {
+      container.textContent = "No first attempt has been committed.";
+      return;
+    }
+
+    const a = state.attempt;
+    const r = a.responses;
+
+    const pairs = [
+      ["Record route", a.kind === "oral"
+        ? "Teacher-reported oral first attempt; independent individual completion is not established."
+        : "Written first attempt; independent completion is not verified by this page."],
+
+      ["Q1 pressure prediction",
+        pressureAnswer(r) || "(No written prediction recorded.)"],
+
+      ["Gas-sharing prediction",
+        choiceLabel("moleChoices", r.moleChoice) || "(Not recorded.)"],
+
+      ["Initial V₂ estimate",
+        r.guess.trim() ? `${r.guess} cm³` : "(No estimate recorded.)"],
+
+      ["Pressure relation(s)",
+        r.pressure || "(No written relation recorded.)"],
+
+      ["Total-moles relation",
+        r.moles || "(No written relation recorded.)"],
+
+      ["Reason",
+        r.reason || "(No written reason recorded.)"]
+    ];
+
+    for (const [label, value] of pairs) {
+      const dt = document.createElement("dt");
+      const dd = document.createElement("dd");
+      dt.textContent = label;
+      dd.textContent = value;
+      container.append(dt, dd);
+    }
+  }
+
+  function updateComparisonControls() {
+    const final = state.s === 1;
+
+    $("saveA").disabled = !final;
+    $("saveB").disabled = !final;
+    $("loadA").disabled = !state.slots.A;
+    $("loadB").disabled = !state.slots.B;
+    $("clearAB").disabled = !state.slots.A && !state.slots.B;
+
+    let note = final
+      ? "You may save this final state. Saving again replaces that slot; it does not mark your explanation."
+      : "Reach the equal-pressure endpoint before saving A or B.";
+
+    if (state.slots.A && state.slots.B &&
+        near(state.slots.A.volumeCm3, state.slots.B.volumeCm3)) {
+      note += " A and B currently use the same V₂; choose different volumes for a useful comparison.";
+    }
+
+    $("ABnote").textContent = note;
+  }
+
+  function renderComparison() {
+    const rows = [
+      ["V₂ / cm³", s => num(s.volumeCm3, 5)],
+      ["P₁,f / p", s => fixed(s.p1OverP, 4)],
+      ["P₂,f / p", s => fixed(s.p2OverP, 4)],
+      ["n₁,f / mol", s => fixed(s.n1mol, 4)],
+      ["n₂,f / mol", s => fixed(s.n2mol, 4)],
+      ["Total / mol", s => fixed(s.totalMol, 4)],
+      ["(P_f − target) / p", s => {
+        const difference = s.p1OverP - P.targetFraction;
+        return `${difference >= 0 ? "+" : ""}${fixed(difference, 4)}`;
+      }]
+    ];
+
+    $("ABbody").replaceChildren();
+
+    for (const [label, formatter] of rows) {
+      const row = document.createElement("tr");
+      const heading = document.createElement("th");
+      heading.scope = "row";
+      heading.textContent = label;
+      row.appendChild(heading);
+
+      for (const slot of ["A", "B"]) {
+        const cell = document.createElement("td");
+        cell.textContent = state.slots[slot]
+          ? formatter(state.slots[slot])
+          : "—";
+        row.appendChild(cell);
+      }
+
+      $("ABbody").appendChild(row);
+    }
+
+    updateComparisonControls();
+  }
+
+  function renderPlot(m) {
+    const x0 = 54, x1 = 574, y0 = 177, height = 134;
+    const x = progress => x0 + (x1 - x0) * progress;
+    const y = ratio => y0 - height * ratio;
+
+    $("plotContent").innerHTML = `
+      <rect x="0" y="0" width="600" height="225" fill="#fff"/>
+      <g stroke="#dbe3de" stroke-width="1">
+        <line x1="${x0}" y1="${y(0)}" x2="${x1}" y2="${y(0)}"/>
+        <line x1="${x0}" y1="${y(.5)}" x2="${x1}" y2="${y(.5)}"/>
+        <line x1="${x0}" y1="${y(1)}" x2="${x1}" y2="${y(1)}"/>
+      </g>
+      <g fill="#4c6269" font-family="system-ui,sans-serif" font-size="14">
+        <text x="12" y="22">P / p</text>
+        <text x="18" y="${y(1) + 5}">1.0</text>
+        <text x="18" y="${y(.5) + 5}">0.5</text>
+        <text x="30" y="${y(0) + 5}">0</text>
+        <text x="${x0}" y="201">0%</text>
+        <text x="${x(.5) - 16}" y="201">50%</text>
+        <text x="${x1 - 36}" y="201">100%</text>
+        <text x="170" y="222">Illustrative transfer progress</text>
+      </g>
+      <line x1="${x0}" y1="${y(P.targetFraction)}"
+            x2="${x1}" y2="${y(P.targetFraction)}"
+            stroke="#53646a" stroke-width="1.5" stroke-dasharray="2 5"/>
+      <path d="M ${x0} ${y(1)} L ${x(state.s)} ${y(m.p1)}"
+            fill="none" stroke="#08675f" stroke-width="3.5"/>
+      <path d="M ${x0} ${y(0)} L ${x(state.s)} ${y(m.p2)}"
+            fill="none" stroke="#ac3e22" stroke-width="3.5" stroke-dasharray="9 6"/>
+      <line x1="${x(state.s)}" y1="${y(1) - 8}"
+            x2="${x(state.s)}" y2="${y0}"
+            stroke="#718881" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="${x(state.s)}" cy="${y(m.p1)}" r="5"
+              fill="#08675f" stroke="#fff" stroke-width="2"/>
+      <rect x="${x(state.s) - 4}" y="${y(m.p2) - 4}"
+            width="8" height="8"
+            fill="#ac3e22" stroke="#fff" stroke-width="1.5"/>
+    `;
+
+    $("plotDesc").textContent =
+      `At ${num(state.s * 100, 1)}% illustrative progress, ` +
+      `vessel 1 pressure is ${pressureText(m.p1)} and ` +
+      `vessel 2 pressure is ${pressureText(m.p2)}. ` +
+      `The design target is ${targetName()}. This is not a physical-time plot.`;
+  }
+
+  function renderLab() {
+    const m = model(state.v, state.s);
+
+    $("appliedVolume").textContent = `Applied V₂: ${num(state.v, 6)} cm³`;
+    $("readP1").textContent = pressureText(m.p1);
+    $("readP2").textContent = pressureText(m.p2);
+    $("readN1").textContent = moleText(m.n1);
+    $("readN2").textContent = moleText(m.n2);
+    $("readV1").textContent = `${num(P.V1cm3, 6)} cm³`;
+    $("readV2").textContent = `${num(state.v, 6)} cm³`;
+    $("readT1").textContent = `${num(P.T1C, 2)} °C / ${num(T1, 2)} K`;
+    $("readT2").textContent = `${num(P.T2C, 2)} °C / ${num(T2, 2)} K`;
+    $("totalMoles").textContent = moleText(m.n1 + m.n2);
+
+    $("bar1").style.width = `${100 * m.n1 / P.n0mol}%`;
+    $("bar2").style.width = `${100 * m.n2 / P.n0mol}%`;
+
+    $("progress").value = String(Math.round(state.s * 1000));
+    $("progress").setAttribute(
+      "aria-valuetext",
+      `${num(state.s * 100, 1)} percent illustrative transfer progress`
+    );
+    $("progressValue").textContent = `${num(state.s * 100, 1)}%`;
+
+    $("openValveBtn").disabled = state.valveOpen;
+
+    if (state.playing) {
+      $("playBtn").textContent = "Pause";
+    } else if (state.s === 1) {
+      $("playBtn").textContent = "Animate molecular motion";
+    } else {
+      $("playBtn").textContent = "Resume exchange";
+    }
+
+    $("playBtn").disabled =
+      !state.valveOpen || (state.s === 1 && reducedMotion());
+
+    $("stepBtn").disabled = !state.valveOpen || state.s === 1;
+    $("finalBtn").disabled = state.s === 1;
+    $("speedSelect").value = String(state.speed);
+
+    $("reduceMotion").checked = reducedMotion();
+    $("reduceMotion").disabled = systemReducedMotion;
+
+    $("motionMessage").textContent = systemReducedMotion
+      ? "System reduced-motion preference is active. Packet travel and random drift are off; numerical playback and stepping remain available."
+      : state.reduceMotion
+        ? "Reduced particle motion: packets change location without travelling paths. Numerical playback is unchanged."
+        : "Playback speed changes presentation only—not the scientific conditions or real filling time.";
+
+    $("simStatus").textContent = !state.valveOpen
+      ? "Valve closed"
+      : state.s === 1
+        ? state.playing
+          ? "Equal pressure · molecular motion"
+          : "Equal pressure · view paused"
+        : state.playing
+          ? "Valve open · exchanging"
+          : "Valve open · view paused";
+
+    if (!state.valveOpen) {
+      $("observedState").textContent =
+        `Initial state: all ${num(P.n0mol, 6)} mol are in vessel 1. ` +
+        "Vessel 2 is evacuated. Open the valve to begin.";
+    } else if (state.s < 1) {
+      $("observedState").textContent =
+        `Displayed state: P₁ = ${pressureText(m.p1)}, ` +
+        `P₂ = ${pressureText(m.p2)}. ` +
+        "The schematic follows net redistribution from vessel 1 to vessel 2. " +
+        (state.playing ? "The view is playing." : "The view is paused.");
+    } else {
+      const difference = m.pf - P.targetFraction;
+      $("observedState").textContent =
+        `Equal-pressure endpoint: P₁,f = P₂,f = ${pressureText(m.pf)}. ` +
+        `Difference from the design target: ${difference >= 0 ? "+" : ""}` +
+        `${fixed(difference, CONFIG.visual.pressureDigits)} p. ` +
+        "Read both mole values and record what this trial shows. " +
+        "Equal final pressures alone do not establish that the target has been reached.";
+    }
+
+    $("beginCheck").textContent = state.q2
+      ? "Return to recorded Q2"
+      : "Start independent Q2";
+
+    $("beginCheck").disabled = !state.q2 && state.trials.length === 0;
+
+    $("checkGate").textContent = state.q2
+      ? "Your first Q2 answer remains locked. Later revisions stay separate."
+      : state.trials.length
+        ? "Add an evidence note, then open Q2. Earlier work will be hidden."
+        : "Complete at least one equal-pressure trial before opening Q2. A/B comparison is recommended.";
+
+    $("gasCanvas").setAttribute(
+      "aria-label",
+      `Two-vessel schematic at ${num(state.s * 100, 1)}% illustrative progress. ` +
+      `Vessel 1: ${moleText(m.n1)}, ${pressureText(m.p1)}. ` +
+      `Vessel 2: ${moleText(m.n2)}, ${pressureText(m.p2)}. ` +
+      "Drawing sizes and particle spacing are not to scale."
+    );
+
+    updateComparisonControls();
+    renderPlot(m);
+    drawCanvas();
+  }
+
+  function renderReview() {
+    if (!state.q2) return;
+
+    $("q2Recorded").textContent = state.q2.answer;
+    $("evidenceAtCheck").textContent =
+      state.q2.evidenceAtCheck || "(No written evidence snapshot.)";
+
+    const claim = state.q2.claimIndependent
+      ? "Learner reported completing Q2 without help."
+      : "No claim of unaided completion was made.";
+
+    const consultation = state.q2.consulted
+      ? " The experiment was consulted after Q2 first opened."
+      : " No return to the experiment from the Q2 screen was recorded.";
+
+    const route = state.attempt.kind === "oral"
+      ? " The initial unlock used the teacher-reported oral route."
+      : " The initial unlock used a written record.";
+
+    $("q2RecordNote").textContent =
+      claim + consultation + route +
+      " These records do not verify independence and are not a grade.";
+
+    $("showReference").textContent = state.solutionVisible
+      ? "Hide teacher reference"
+      : "Reveal teacher reference · after Q2";
+
+    $("referencePanel").hidden = !state.solutionVisible;
+
+    if (state.solutionVisible) {
+      $("referencePanel").innerHTML = referenceHTML();
+    }
+  }
+
+  function render() {
+    for (const name of ["predict", "lab", "check", "review"]) {
+      $(`${name}Panel`).hidden = state.stage !== name;
+    }
+
+    const checking = state.stage === "check";
+
+    $("heroBlock").hidden = checking;
+    $("factsBlock").hidden = checking;
+    $("teacherMode").checked = state.teacherMode;
+    $("teacherMode").disabled = checking;
+    document.body.classList.toggle("presentation", state.teacherMode);
+
+    $("oralRoute").hidden = !state.teacherMode || state.stage !== "predict";
+    $("oralUnlock").disabled = !$("oralConfirm").checked;
+
+    for (const id of [
+      "printWorksheetBtn", "exportBriefBtn", "loadLocal", "exportRecord"
+    ]) {
+      $(id).disabled = checking;
+    }
+
+    const current =
+      state.stage === "predict" ? 1 :
+      state.stage === "lab" ? 2 : 3;
+
+    for (let i = 1; i <= 3; i++) {
+      if (i === current) $(`stage${i}`).setAttribute("aria-current", "step");
+      else $(`stage${i}`).removeAttribute("aria-current");
+    }
+
+    updateChoiceUI();
+    renderAttempt("firstAttemptLab");
+    renderAttempt("firstAttemptReview");
+    renderComparison();
+    renderLab();
+    renderReview();
+
+    if (state.stage === "lab") resizeCanvas();
+  }
+
+  /*
+   * ============================================================
+   * CLEARER PARTICLE APPARATUS
+   * ============================================================
+   *
+   * Packets are representative groups of gas molecules.
+   *
+   * The final packet inventory is rounded. During playback,
+   * packets travel along continuous paths through the tube.
+   *
+   * The tube drawing is symbolic: it does not create a third
+   * numerical gas inventory. Readouts are the authoritative,
+   * continuous numerical model.
+   *
+   * Chamber widths respond to V2 through a compressed schematic
+   * display range, not an exact volume or density scale.
+   */
+
+  function seed(index, salt) {
+    const value = Math.sin((index + 1) * (salt + 3) * 78.233) * 43758.5453;
+    return value - Math.floor(value);
+  }
+
+  function bounce(value) {
+    const wrapped = ((value % 2) + 2) % 2;
+    return wrapped <= 1 ? wrapped : 2 - wrapped;
+  }
+
+  function packetCountForV2(volume) {
+    const final = model(volume, 1);
+    return Math.max(
+      0,
+      Math.min(
+        CONFIG.visual.packetCount,
+        Math.round(final.n2 / P.n0mol * CONFIG.visual.packetCount)
+      )
+    );
+  }
+
+  function transferPhase(index, progress, transferredPackets) {
+    if (transferredPackets <= 0 || index >= transferredPackets) return 0;
+
+    const span = Math.min(
+      CONFIG.visual.maximumTravelWindow,
+      Math.max(
+        CONFIG.visual.minimumTravelWindow,
+        3.2 / transferredPackets
+      )
+    );
+
+    const centre = (index + 0.5) / transferredPackets;
+    const start = Math.max(0, centre - span / 2);
+    const end = Math.min(1, centre + span / 2);
+
+    return Math.max(0, Math.min(1, (progress - start) / (end - start)));
+  }
+
+  function apparatusGeometry() {
+    const w = canvasWidth;
+    const h = canvasHeight;
+    const padding = Math.max(10, Math.min(28, w * .025));
+    const gap = Math.max(52, Math.min(164, w * .17));
+    const slotWidth = (w - 2 * padding - gap) / 2;
+    const centre1 = padding + slotWidth / 2;
+    const centre2 = padding + slotWidth + gap + slotWidth / 2;
+
+    const width1 = slotWidth * .82;
+    const rawWidth2 = width1 * Math.cbrt(state.v / P.V1cm3);
+    const width2 = Math.max(
+      slotWidth * .55,
+      Math.min(slotWidth * .96, rawWidth2)
+    );
+
+    const y = 210;
+    const height = h - 302;
+
+    return {
+      slotWidth,
+      centre1,
+      centre2,
+      left: {
+        x: centre1 - width1 / 2,
+        y,
+        w: width1,
+        h: height
+      },
+      right: {
+        x: centre2 - width2 / 2,
+        y,
+        w: width2,
+        h: height
+      },
+      compressed:
+        Math.abs(width2 - rawWidth2) > 0.01
+    };
+  }
+
+  function particlePosition(rect, index, temperature) {
+    const margin = 8;
+    const phase = reducedMotion() ? 0 : driftPhase;
+    const speed = Math.sqrt(temperature / T1);
+    const directionX = seed(index, 1) > .5 ? 1 : -1;
+    const directionY = seed(index, 2) > .5 ? 1 : -1;
+
+    return {
+      x: rect.x + margin +
+        bounce(seed(index, 3) * 2 + phase * .17 * speed * directionX) *
+        (rect.w - 2 * margin),
+
+      y: rect.y + margin +
+        bounce(seed(index, 4) * 2 + phase * .19 * speed * directionY) *
+        (rect.h - 2 * margin)
+    };
+  }
+
+  function pointAlong(points, fraction) {
+    const lengths = [];
+    let total = 0;
+
+    for (let i = 1; i < points.length; i++) {
+      const length = Math.hypot(
+        points[i].x - points[i - 1].x,
+        points[i].y - points[i - 1].y
+      );
+      lengths.push(length);
+      total += length;
+    }
+
+    let distance = Math.max(0, Math.min(1, fraction)) * total;
+
+    for (let i = 0; i < lengths.length; i++) {
+      if (distance <= lengths[i] || i === lengths.length - 1) {
+        const t = lengths[i] ? distance / lengths[i] : 0;
+        return {
+          x: points[i].x + (points[i + 1].x - points[i].x) * t,
+          y: points[i].y + (points[i + 1].y - points[i].y) * t
+        };
+      }
+      distance -= lengths[i];
+    }
+
+    return points[points.length - 1];
+  }
+
+  function roundedPath(x, y, width, height, radius) {
+    const r = Math.min(radius, width / 2, height / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + width, y, x + width, y + height, r);
+    ctx.arcTo(x + width, y + height, x, y + height, r);
+    ctx.arcTo(x, y + height, x, y, r);
+    ctx.arcTo(x, y, x + width, y, r);
+    ctx.closePath();
+  }
+
+  function arrow(x1, x2, y, color) {
+    const direction = x2 > x1 ? 1 : -1;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.lineTo(x2 - direction * 6, y - 4);
+    ctx.moveTo(x2, y);
+    ctx.lineTo(x2 - direction * 6, y + 4);
+    ctx.stroke();
+  }
+
+  function drawGauge(cx, ratio, label, color, availableWidth) {
+    const cy = 90;
+    const r = Math.min(39, Math.max(28, availableWidth * .29));
+    const start = .8 * Math.PI;
+    const sweep = 1.4 * Math.PI;
+    const value = Math.max(0, Math.min(1, ratio));
+    const valueAngle = start + sweep * value;
+    const targetAngle = start + sweep * P.targetFraction;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = color;
+    ctx.font = "750 13px system-ui, sans-serif";
+    ctx.fillText(label, 0, -r - 12);
+
+    ctx.strokeStyle = "#d4dfd8";
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.arc(0, 0, r, start, start + sweep);
+    ctx.stroke();
+
+    if (value > 0) {
+      ctx.strokeStyle = color;
+      ctx.beginPath();
+      ctx.arc(0, 0, r, start, valueAngle);
+      ctx.stroke();
+    }
+
+    for (const tick of [0, .25, .5, .75, 1]) {
+      const angle = start + sweep * tick;
+      ctx.strokeStyle = COLORS.muted;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(angle) * (r - 6), Math.sin(angle) * (r - 6));
+      ctx.lineTo(Math.cos(angle) * (r + 3), Math.sin(angle) * (r + 3));
+      ctx.stroke();
+    }
+
+    ctx.save();
+    ctx.setLineDash([2, 2]);
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(
+      Math.cos(targetAngle) * (r - 10),
+      Math.sin(targetAngle) * (r - 10)
+    );
+    ctx.lineTo(
+      Math.cos(targetAngle) * (r + 9),
+      Math.sin(targetAngle) * (r + 9)
+    );
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(
+      Math.cos(valueAngle) * (r - 9),
+      Math.sin(valueAngle) * (r - 9)
+    );
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(0, 0, 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = COLORS.ink;
+    ctx.fill();
+
+    ctx.font = "11px system-ui, sans-serif";
+    ctx.fillStyle = COLORS.muted;
+    ctx.fillText("0", -r - 3, r * .64 + 9);
+    ctx.fillText("1", r + 3, r * .64 + 9);
+
+    const badgeWidth = Math.min(150, availableWidth - 2);
+    roundedPath(-badgeWidth / 2, 43, badgeWidth, 25, 7);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.strokeStyle = COLORS.line;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.font = "750 13px ui-monospace, monospace";
+    ctx.fillStyle = COLORS.ink;
+    ctx.fillText(`${fixed(ratio, 3)} p`, 0, 60);
+
+    ctx.restore();
+  }
+
+  function drawCanvas() {
+    if (!ctx || $("labPanel").hidden || !canvasWidth) return;
+
+    const w = canvasWidth;
+    const h = canvasHeight;
+    const g = apparatusGeometry();
+    const left = g.left;
+    const right = g.right;
+    const m = model(state.v, state.s);
+    const tubeY = left.y + left.h / 2;
+    const tubeLeft = left.x + left.w;
+    const tubeRight = right.x;
+    const tubeHeight = w < 600 ? 20 : 28;
+    const valveX = (tubeLeft + tubeRight) / 2;
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = COLORS.background;
+    ctx.fillRect(0, 0, w, h);
+
+    /* Subtle apparatus grid. */
+    ctx.strokeStyle = "#eaf0e8";
+    ctx.lineWidth = 1;
+
+    for (let x = 12; x < w; x += 28) {
+      ctx.beginPath();
+      ctx.moveTo(x, 12);
+      ctx.lineTo(x, h - 12);
+      ctx.stroke();
+    }
+
+    /* Status text uses words, not colour alone. */
+    ctx.textAlign = "center";
+    ctx.fillStyle = COLORS.muted;
+    ctx.font = "750 12px system-ui, sans-serif";
+
+    const statusText = !state.valveOpen
+      ? "INITIAL STATE · VALVE CLOSED"
+      : state.s === 1
+        ? "EQUAL PRESSURE · NO NET ACCUMULATION"
+        : state.playing
+          ? "NET REDISTRIBUTION · LEFT TO RIGHT"
+          : "VIEW PAUSED · STATE RETAINED";
+
+    ctx.fillText(statusText, w / 2, 22);
+
+    /* Pressure gauges. */
+    drawGauge(
+      g.centre1, m.p1, "Vessel 1 · P₁",
+      COLORS.teal, g.slotWidth
+    );
+    drawGauge(
+      g.centre2, m.p2, "Vessel 2 · P₂",
+      COLORS.orange, g.slotWidth
+    );
+
+    /* Numerical labels remain centred in fixed, readable slots. */
+    ctx.textAlign = "center";
+    ctx.font = "650 12px ui-monospace, monospace";
+    ctx.fillStyle = COLORS.ink;
+
+    ctx.fillText(`V₁ ${num(P.V1cm3, 2)} cm³`, g.centre1, 174);
+    ctx.fillText(`n₁ ${fixed(m.n1, 2)} mol`, g.centre1, 192);
+    ctx.fillText(`V₂ ${num(state.v, 2)} cm³`, g.centre2, 174);
+    ctx.fillText(`n₂ ${fixed(m.n2, 2)} mol`, g.centre2, 192);
+
+    /* Thermostat jackets. */
+    for (const [rect, fill, stroke] of [
+      [left, COLORS.tealSoft, COLORS.teal],
+      [right, COLORS.orangeSoft, COLORS.orange]
+    ]) {
+      roundedPath(rect.x - 7, rect.y - 8, rect.w + 14, rect.h + 18, 14);
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    /* Connecting tube. */
+    ctx.fillStyle = "#e8eeea";
+    ctx.fillRect(
+      tubeLeft, tubeY - tubeHeight / 2,
+      tubeRight - tubeLeft, tubeHeight
+    );
+
+    ctx.strokeStyle = "#6b827c";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(tubeLeft, tubeY - tubeHeight / 2);
+    ctx.lineTo(tubeRight, tubeY - tubeHeight / 2);
+    ctx.moveTo(tubeLeft, tubeY + tubeHeight / 2);
+    ctx.lineTo(tubeRight, tubeY + tubeHeight / 2);
+    ctx.stroke();
+
+    /* Gas chambers. */
+    for (const [rect, stroke] of [
+      [left, COLORS.teal],
+      [right, COLORS.orange]
+    ]) {
+      roundedPath(rect.x, rect.y, rect.w, rect.h, 10);
+      ctx.fillStyle = "white";
+      ctx.fill();
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    }
+
+    /* Tube ports. The central gate is the valve. */
+    ctx.fillStyle = "#e8eeea";
+    ctx.fillRect(tubeLeft - 2, tubeY - tubeHeight / 2 + 2, 5, tubeHeight - 4);
+    ctx.fillRect(tubeRight - 3, tubeY - tubeHeight / 2 + 2, 5, tubeHeight - 4);
+
+    /* Valve stem and handle. */
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(valveX, tubeY - tubeHeight / 2);
+    ctx.lineTo(valveX, tubeY - tubeHeight / 2 - 16);
+    ctx.moveTo(valveX - 10, tubeY - tubeHeight / 2 - 16);
+    ctx.lineTo(valveX + 10, tubeY - tubeHeight / 2 - 16);
+    ctx.stroke();
+
+    if (!state.valveOpen) {
+      ctx.fillStyle = COLORS.ink;
+      ctx.fillRect(
+        valveX - 3.5, tubeY - tubeHeight / 2 - 3,
+        7, tubeHeight + 6
+      );
+    } else {
+      ctx.strokeStyle = COLORS.teal;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(valveX - 10, tubeY - tubeHeight / 2 + 2);
+      ctx.lineTo(valveX + 10, tubeY - tubeHeight / 2 + 2);
+      ctx.stroke();
+    }
+
+    /* Net-flow / equal-pressure direction cues. */
+    if (state.valveOpen && state.s < 1) {
+      arrow(tubeLeft + 7, tubeRight - 7, tubeY - 39, COLORS.ink);
+    } else if (state.s === 1) {
+      arrow(tubeLeft + 7, tubeRight - 7, tubeY - 42, COLORS.ink);
+      arrow(tubeRight - 7, tubeLeft + 7, tubeY - 29, COLORS.ink);
+    }
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = COLORS.ink;
+    ctx.font = "750 11px system-ui, sans-serif";
+
+    if (!state.valveOpen) {
+      ctx.fillText("VALVE", valveX, tubeY + tubeHeight / 2 + 26);
+      ctx.fillText("CLOSED", valveX, tubeY + tubeHeight / 2 + 41);
+    } else if (state.s === 1) {
+      ctx.fillText("EQUAL P", valveX, tubeY + tubeHeight / 2 + 26);
+      ctx.fillText("NO NET", valveX, tubeY + tubeHeight / 2 + 41);
+    } else {
+      ctx.fillText("VALVE OPEN", valveX, tubeY + tubeHeight / 2 + 26);
+      ctx.fillText("1 → 2", valveX, tubeY + tubeHeight / 2 + 41);
+    }
+
+    /* Representative gas packets. */
+    const finalPacketCount = packetCountForV2(state.v);
+    const radius = w < 600 ? 2.6 : 3.5;
+
+    for (let i = 0; i < CONFIG.visual.packetCount; i++) {
+      const pLeft = particlePosition(left, i, T1);
+      const pRight = particlePosition(right, i, T2);
+
+      let point = pLeft;
+      let color = COLORS.teal;
+      let inTube = false;
+
+      if (reducedMotion()) {
+        const displayedRight = Math.round(finalPacketCount * state.s);
+        if (i < displayedRight) {
+          point = pRight;
+          color = COLORS.orange;
+        }
+      } else if (i < finalPacketCount) {
+        const phase = transferPhase(i, state.s, finalPacketCount);
+
+        if (phase >= 1) {
+          point = pRight;
+          color = COLORS.orange;
+        } else if (phase > 0) {
+          const lane = ((i % 3) - 1) * (tubeHeight / 6);
+
+          point = pointAlong([
+            pLeft,
+            { x: tubeLeft - 2, y: tubeY + lane },
+            { x: tubeRight + 2, y: tubeY + lane },
+            pRight
+          ], phase);
+
+          inTube = point.x >= tubeLeft && point.x <= tubeRight;
+          color = inTube
+            ? COLORS.ink
+            : point.x >= tubeRight ? COLORS.orange : COLORS.teal;
+        }
+      }
+
+      if (inTube) {
+        ctx.strokeStyle = "#738b82";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(Math.max(tubeLeft + 1, point.x - 8), point.y);
+        ctx.lineTo(point.x, point.y);
+        ctx.stroke();
+      }
+
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, inTube ? radius + .8 : radius, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      if (inTube) {
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 1.3;
+        ctx.stroke();
+      }
+    }
+
+    /* Reservoir labels under each jacket. */
+    ctx.textAlign = "center";
+    ctx.font = "750 12px system-ui, sans-serif";
+
+    ctx.fillStyle = COLORS.teal;
+    ctx.fillText(
+      `${num(P.T1C, 1)} °C · held`,
+      g.centre1, left.y + left.h + 34
+    );
+
+    ctx.fillStyle = COLORS.orange;
+    ctx.fillText(
+      `${num(P.T2C, 1)} °C · held`,
+      g.centre2, right.y + right.h + 34
+    );
+
+    ctx.font = "12px system-ui, sans-serif";
+    ctx.fillStyle = COLORS.muted;
+    ctx.fillText(`${num(T1, 2)} K`, g.centre1, left.y + left.h + 54);
+    ctx.fillText(`${num(T2, 2)} K`, g.centre2, right.y + right.h + 54);
+
+    ctx.textAlign = "left";
+  }
+
+  function resizeCanvas() {
+    if (!ctx || $("labPanel").hidden) return;
+
+    const rect = $("gasCanvas").getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const width = Math.round(rect.width * dpr);
+    const height = Math.round(rect.height * dpr);
+
+    if ($("gasCanvas").width !== width || $("gasCanvas").height !== height) {
+      $("gasCanvas").width = width;
+      $("gasCanvas").height = height;
+    }
+
+    canvasWidth = rect.width;
+    canvasHeight = rect.height;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawCanvas();
+  }
+
+  function frame(timestamp) {
+    const dt = lastFrame
+      ? Math.min((timestamp - lastFrame) / 1000, .08)
+      : 0;
+
+    lastFrame = timestamp;
+
+    if (state.playing && state.stage === "lab") {
+      const oldProgress = state.s;
+
+      if (state.s < 1) {
+        state.s = Math.min(
+          1,
+          state.s + dt * 1000 * state.speed / CONFIG.playback.durationMs
+        );
+      }
+
+      if (!reducedMotion()) driftPhase += dt * state.speed;
+
+      if (oldProgress < 1 && state.s === 1) {
+        state.playing = false;
+        recordFinalIfNeeded();
+        renderLab();
+
+        announce(
+          "Equal final pressures reached. The view is paused. " +
+          "Molecules do not stop moving at equilibrium; you may animate their motion again."
+        );
+      } else if (timestamp - lastReadout >= 90) {
+        renderLab();
+        lastReadout = timestamp;
+      }
+
+      drawCanvas();
+    }
+
+    window.requestAnimationFrame(frame);
+  }
+
+  /*
+   * ============================================================
+   * DELAYED REFERENCE AND SHARED WORKSHEET
+   * ============================================================
+   */
+
+  function referenceHTML() {
+    const q = P.targetFraction;
+    const target = targetVolume();
+    const n1 = q * P.n0mol;
+    const n2 = (1 - q) * P.n0mol;
+    const equalVolume = model(P.V1cm3, 1);
+
+    return `
+      <p class="eyebrow">Teacher reference / Delayed until after Q2</p>
+      <h3>Equal pressure is a condition. Conservation closes the model.</h3>
+
+      <p>
+        Use absolute temperatures:
+        T₁ = ${num(T1, 2)} K and T₂ = ${num(T2, 2)} K.
+        When using R in J mol⁻¹ K⁻¹ and pressure in Pa, convert cm³ to m³.
+        Matching volume units may be retained in dimensionless ratios.
+      </p>
+
+      <div class="equation">Initial state: pV₁ = n₀RT₁</div>
+      <div class="equation">Final vessel 1: P_f V₁ = n₁,f RT₁</div>
+      <div class="equation">Final vessel 2: P_f V₂ = n₂,f RT₂</div>
+      <div class="equation">Conservation: n₁,f + n₂,f = n₀</div>
+
+      <div class="equation">
+        Q2: n₀ = P_f V₁/(RT₁) + P_f V₂/(RT₂)
+      </div>
+
+      <div class="equation">
+        Equivalently:
+        pV₁/(RT₁) = P_f V₁/(RT₁) + P_f V₂/(RT₂)
+      </div>
+
+      <div class="equation">
+        P_f = n₀R / (V₁/T₁ + V₂/T₂)
+      </div>
+
+      <div class="equation">
+        P_f/p = 1 / [1 + (V₂/V₁)(T₁/T₂)]
+      </div>
+
+      <h4>Apply the specified target</h4>
+      <p>
+        Let q = P_f/p = ${num(q, 6)}.
+        V₁ and T₁ are unchanged, so:
+      </p>
+
+      <div class="equation">
+        n₁,f = qn₀ = ${num(n1, 6)} mol;
+        n₂,f = (1 − q)n₀ = ${num(n2, 6)} mol
+      </div>
+
+      <div class="equation">
+        V₂ = V₁(T₂/T₁)(1/q − 1)
+        = ${num(target, 5)} cm³
+      </div>
+
+      ${near(q, .5) ? `
+        <p>
+          For this half-pressure target,
+          <strong>each vessel contains ${num(P.n0mol / 2, 6)} mol</strong>.
+          The system still contains
+          <strong>${num(P.n0mol, 6)} mol in total</strong>.
+        </p>
+        <p>
+          Halving the pressure does halve n₁ here because vessel 1 keeps
+          the same volume and temperature. Conservation puts the other
+          half in vessel 2. It does not halve the system’s total amount.
+        </p>
+      ` : `
+        <p>
+          The per-vessel mole split follows the specified q.
+          The total amount in the combined system remains unchanged.
+        </p>
+      `}
+
+      <h4>Equal pressure does not generally mean equal amounts</h4>
+
+      <div class="equation">
+        n₁,f/n₂,f = (V₁/T₁)/(V₂/T₂)
+      </div>
+
+      <p>
+        For the equal-volume comparison
+        V₂ = V₁ = ${num(P.V1cm3, 6)} cm³,
+        the model gives P_f ≈ ${fixed(equalVolume.pf, 5)}p,
+        n₁,f ≈ ${fixed(equalVolume.n1, 5)} mol and
+        n₂,f ≈ ${fixed(equalVolume.n2, 5)} mol.
+        Equal amounts require matching V/T values—not merely equal pressures.
+      </p>
+
+      <h4>Corrected learning evidence and success criteria</h4>
+      <p>${escapeHTML(CONFIG.teaching.correctedOutcome)}</p>
+
+      <ul>
+        <li>Use kelvin and consistent units.</li>
+        <li>Write an ideal-gas equation for each final vessel with the same P_f.</li>
+        <li>Conserve the total amount: n₁,f + n₂,f = n₀.</li>
+        <li>Justify the target-specific mole split.</li>
+        <li>Derive V₂ and explain any revision using recorded evidence.</li>
+      </ul>
+
+      <p class="small">
+        This is a teacher reference, not an automatic grade.
+        Judge equations and reasoning—not target matching, control use
+        or self-reported independence.
+      </p>
+    `;
+  }
+
+  function buildWorksheet(checkOnly = false) {
+    const rules = count => Array.from(
+      { length: count },
+      () => '<div class="rule"></div>'
+    ).join("");
+
+    if (checkOnly) {
+      $("printWorksheet").innerHTML = `
+        <h1>${escapeHTML(CONFIG.activity)}</h1>
+        <h2>Independent Q2</h2>
+        <p>${escapeHTML(SHARED.Q2)}</p>
+        ${rules(12)}
+        <p class="print-note">
+          No additional hints. A self-report cannot prove independent completion.
+        </p>
+      `;
+      return;
+    }
+
+    const C = CONFIG.teaching.commit;
+
+    $("printWorksheet").innerHTML = `
+      <h1>${escapeHTML(CONFIG.activity)}</h1>
+      <p>${escapeHTML(CONFIG.subject)} / ${escapeHTML(CONFIG.audience)} / English</p>
+
+      <p><strong>C1</strong> · ${escapeHTML(SHARED.C1)}</p>
+      <p class="print-note">
+        Ideal-gas abstraction. Fixed vessel temperatures; negligible tube volume;
+        no leaks. The supplied high-density numbers are not a real-laboratory instruction.
+      </p>
+
+      <h2>01 / Commit a model</h2>
+      <p><strong>Q1</strong> · ${escapeHTML(SHARED.Q1)}</p>
+
+      <div class="print-options">
+        ${C.pressureChoices.map(choice =>
+          `☐ ${escapeHTML(choice.label)}`
+        ).join(" &nbsp; ")}
+      </div>
+
+      <p>${escapeHTML(C.molePrompt)}</p>
+      <div class="print-options">
+        ${C.moleChoices.map(choice =>
+          `☐ ${escapeHTML(choice.label)}`
+        ).join("<br>")}
+      </div>
+
+      <p>${escapeHTML(C.guessPrompt)}</p>
+      ${rules(1)}
+
+      <p>${escapeHTML(C.pressurePrompt)}</p>
+      ${rules(2)}
+
+      <p>${escapeHTML(C.molesPrompt)}</p>
+      ${rules(2)}
+
+      <p>${escapeHTML(C.reasonPrompt)}</p>
+      ${rules(2)}
+
+      <h2>02 / Observe and compare</h2>
+      <table>
+        <thead>
+          <tr><th>Quantity</th><th>A</th><th>B</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>V₂ / cm³</th><td>&nbsp;</td><td>&nbsp;</td></tr>
+          <tr><th>Final P₁/p and P₂/p</th><td>&nbsp;</td><td>&nbsp;</td></tr>
+          <tr><th>Final n₁ and n₂ / mol</th><td>&nbsp;</td><td>&nbsp;</td></tr>
+          <tr><th>Total amount / mol</th><td>&nbsp;</td><td>&nbsp;</td></tr>
+        </tbody>
+      </table>
+
+      <p>Evidence and what it shows:</p>
+      ${rules(3)}
+
+      <section class="worksheet-check">
+        <h2>03 / Independent check</h2>
+        <p><strong>Q2</strong> · ${escapeHTML(SHARED.Q2)}</p>
+        <p class="print-note">
+          Put the experiment and earlier notes out of view.
+          No additional hints. A self-report does not prove independent completion.
+        </p>
+
+        ${rules(8)}
+
+        <h2>Revision after the check</h2>
+        <p>Keep the original answer. Explain any change and the evidence for it.</p>
+        ${rules(5)}
+      </section>
+    `;
+  }
+
+  function buildStaticContent() {
+    document.title = `${CONFIG.activity} — ${CONFIG.subject} / ${CONFIG.audience}`;
+
+    $("brandTitle").textContent = CONFIG.activity;
+    $("brandCourse").textContent = `${CONFIG.subject} / ${CONFIG.audience}`;
+    $("courseLine").textContent =
+      `${CONFIG.subject} / ${CONFIG.audience} / Ideal-gas modelling`;
+
+    $("c1Text").textContent = SHARED.C1;
+    $("q1Text").textContent = SHARED.Q1;
+    $("q2Text").textContent = SHARED.Q2;
+
+    const p0 = initialPressure();
+
+    $("modelScaleNote").textContent = p0 >= 1e7
+      ? `Mathematical abstraction—not a real high-pressure experiment. ` +
+        `The supplied initial state gives p ≈ ${num(p0 / 1e9, 3)} GPa in the ideal model. ` +
+        "Real-gas behaviour at this density is not represented."
+      : "Ideal-gas abstraction, not a laboratory safety plan. " +
+        `The model gives an initial absolute pressure of approximately ${num(p0, 1)} Pa.`;
+
+    fillList("assumptionsList", CONFIG.teaching.assumptions);
+    fillList("discussion", CONFIG.teaching.discussion);
+
+    const facts = [
+      ["Vessel 1 volume", `${num(P.V1cm3, 6)} cm³ · fixed`],
+      ["Initial amount", `${num(P.n0mol, 6)} mol · all in vessel 1`],
+      ["Reservoir temperatures", `${num(P.T1C, 2)} °C / ${num(P.T2C, 2)} °C`],
+      ["Design target", `Final pressure in each vessel: ${targetName()}`]
+    ];
+
+    $("factsBlock").replaceChildren();
+
+    for (const [label, value] of facts) {
+      const card = document.createElement("div");
+      card.className = "fact";
+
+      const small = document.createElement("span");
+      const strong = document.createElement("strong");
+
+      small.textContent = label;
+      strong.textContent = value;
+      card.append(small, strong);
+      $("factsBlock").appendChild(card);
+    }
+
+    const C = CONFIG.teaching.commit;
+
+    $("molePromptLabel").textContent = C.molePrompt;
+    $("guessPromptLabel").textContent = C.guessPrompt;
+    $("pressurePromptLabel").textContent = C.pressurePrompt;
+    $("molesPromptLabel").textContent = C.molesPrompt;
+    $("reasonPromptLabel").textContent = C.reasonPrompt;
+
+    $("pressureChoices").replaceChildren();
+
+    for (const choice of C.pressureChoices) {
+      const label = document.createElement("label");
+      label.className = "radio-choice";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "pressureChoice";
+      input.value = choice.id;
+      input.id = `pressure-choice-${choice.id}`;
+      input.setAttribute("aria-describedby", "q1Help");
+
+      const span = document.createElement("span");
+      span.textContent = choice.label;
+
+      label.append(input, span);
+      $("pressureChoices").appendChild(label);
+
+      input.addEventListener("change", () => {
+        captureInputs();
+        updateChoiceUI();
+        $("predictionError").hidden = true;
+      });
+    }
+
+    $("molePrediction").replaceChildren();
+
+    const emptyOption = document.createElement("option");
+    emptyOption.value = "";
+    emptyOption.textContent = "Choose your initial prediction";
+    $("molePrediction").appendChild(emptyOption);
+
+    for (const choice of C.moleChoices) {
+      const option = document.createElement("option");
+      option.value = choice.id;
+      option.textContent = choice.label;
+      $("molePrediction").appendChild(option);
+    }
+
+    for (const id of ["volumeInput", "initialGuess"]) {
+      $(id).min = String(CONFIG.volume.min);
+      $(id).max = String(CONFIG.volume.max);
+    }
+
+    $("guessHelp").textContent =
+      `Allowed range: ${num(CONFIG.volume.min, 6)}–${num(CONFIG.volume.max, 6)} cm³. ` +
+      `If blank, the lab starts at ${num(CONFIG.volume.initial, 6)} cm³; no estimate is recorded.`;
+
+    $("volumeHelp").textContent =
+      `${num(CONFIG.volume.min, 6)}–${num(CONFIG.volume.max, 6)} cm³. ` +
+      "Typing changes a draft. Apply changes the model and closes the valve for a fresh trial.";
+
+    $("stepBtn").textContent =
+      `Advance ${num(CONFIG.playback.stepProgress * 100, 1)}%`;
+
+    $("speedSelect").replaceChildren();
+
+    for (const speed of CONFIG.playback.speeds) {
+      const option = document.createElement("option");
+      option.value = String(speed);
+      option.textContent = `${num(speed, 2)}×`;
+      $("speedSelect").appendChild(option);
+    }
+
+    $("presetButtons").replaceChildren();
+
+    for (const volume of CONFIG.volume.presets) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = `V₂ = ${num(volume, 5)} cm³`;
+      button.addEventListener("click", () =>
+        applyVolume(volume, "Preset V₂ applied.")
+      );
+      $("presetButtons").appendChild(button);
+    }
+
+    $("particleNote").textContent =
+      `${CONFIG.visual.packetCount} representative packets; each represents approximately ` +
+      `${num(P.n0mol / CONFIG.visual.packetCount, 6)} mol. ` +
+      "Colours identify location, not different gases. " +
+      "Widths use a compressed schematic range—not an exact volume or density scale. " +
+      "Packet inventories are rounded; numerical readouts are continuous. " +
+      "Tube paths illustrate net transfer and add no extra gas. " +
+      "Microscopic equilibrium crossings are not individually simulated. " +
+      "Pausing freezes the view, not real molecular motion.";
+
+    buildWorksheet();
+  }
+
+  /*
+   * ============================================================
+   * EXPLICIT RECORDS AND EXPORT
+   * ============================================================
+   */
+
+  function teachingBrief() {
+    return {
+      format: "gas-exchange-shared-teaching-brief-v2",
+      subject: CONFIG.subject,
+      audience: CONFIG.audience,
+      activity: CONFIG.activity,
+      materialLanguage: CONFIG.language,
+      C1: SHARED.C1,
+      Q1: SHARED.Q1,
+      Q2: SHARED.Q2,
+      firstAttemptPromptsAndChoices: CONFIG.teaching.commit,
+      givens: {
+        ...P,
+        kelvinOffset: 273.15,
+        vessel2InitiallyEvacuated: true
+      },
+      manipulableScientificCondition: "V2 only",
+      correctedOutcome: CONFIG.teaching.correctedOutcome,
+      assumptions: [...CONFIG.teaching.assumptions],
+      discussionPromptsForObservationStage: [...CONFIG.teaching.discussion],
+      botProtocol: [
+        "Use exactly the supplied C1, Q1 and Q2 text.",
+        "Before simulation, collect a Q1 choice or expression, a gas-sharing prediction, separate pressure and mole equation attempts, and a reason.",
+        "The initial V2 estimate is optional. Do not invent an estimate if the learner leaves it blank.",
+        "Do not reveal worked equations or the solved V2 before the first attempt.",
+        "The pressure and gas-sharing choices are unmarked predictions, not evidence of mastery.",
+        "A teacher-reported oral first attempt may unlock presentation but does not establish independent individual work.",
+        "For Q2, provide no additional hints, worked equations or correctness feedback before a response is recorded.",
+        "Delay the full standard derivation until after Q2 and label it as a teacher reference.",
+        "Do not teach that the system's total amount is halved.",
+        "Distinguish the target-specific per-vessel split from a general claim that equal pressure means equal amounts.",
+        "Do not infer conceptual mastery from control use, target matching or self-reported independence.",
+        "This offline page does not connect to or verify an existing AI bot."
+      ]
+    };
+  }
+
+  function recordObject() {
+    captureInputs();
+
+    return {
+      format: "gas-exchange-learner-record-v2",
+      signature: SIGNATURE,
+      shared: { ...SHARED },
+      firstAttemptChoices: {
+        pressure: CONFIG.teaching.commit.pressureChoices,
+        moles: CONFIG.teaching.commit.moleChoices
+      },
+      physics: { ...P, kelvinOffset: 273.15 },
+      recordNotice:
+        "No identity is requested. These records and self-reports are not verified independence or an automatic assessment.",
+      work: {
+        stage: state.stage,
+        teacherMode: state.teacherMode,
+        draft: { ...state.draft },
+        attempt: state.attempt ? {
+          ...state.attempt,
+          responses: { ...state.attempt.responses }
+        } : null,
+        volumeCm3: state.v,
+        transferProgress: state.s,
+        valveOpen: state.valveOpen,
+        playbackSpeed: state.speed,
+        reduceMotion: state.reduceMotion,
+        runRecorded: state.runRecorded,
+        completedTrials: state.trials.map(item => ({ ...item })),
+        slots: {
+          A: state.slots.A ? { ...state.slots.A } : null,
+          B: state.slots.B ? { ...state.slots.B } : null
+        },
+        evidence: state.evidence,
+        checkEvidence: state.checkEvidence,
+        q2Draft: state.q2Draft,
+        q2Claim: state.q2Claim,
+        experimentConsultedDuringCheck: state.consulted,
+        q2: state.q2 ? { ...state.q2 } : null,
+        revision: state.revision,
+        teacherReferenceSeen: state.solutionSeen
+      }
+    };
+  }
+
+  function downloadJSON(filename, object) {
+    try {
+      const blob = new Blob(
+        [JSON.stringify(object, null, 2)],
+        { type: "application/json;charset=utf-8" }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      link.style.display = "none";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+      announce(
+        "Download requested. Check your browser’s downloads; " +
+        "this page cannot verify that the file was saved."
+      );
+    } catch (error) {
+      announce(`The download could not be requested: ${error.message}`);
+    }
+  }
+
+  function decodeRecord(data) {
+    if (!data || data.format !== "gas-exchange-learner-record-v2") {
+      throw new Error("This is not a supported v2 activity record.");
+    }
+
+    if (data.signature !== SIGNATURE) {
+      throw new Error(
+        "The saved record uses different teaching text, choices or scientific conditions."
+      );
+    }
+
+    const w = data.work;
+
+    if (!w || typeof w !== "object" || Array.isArray(w)) {
+      throw new Error("The saved work section is missing.");
+    }
+
+    function text(value, label, max = 4000) {
+      if (typeof value !== "string" || value.length > max) {
+        throw new Error(`The saved ${label} field is invalid.`);
+      }
+      return value;
+    }
+
+    function responses(source) {
+      if (!source || typeof source !== "object" || Array.isArray(source)) {
+        throw new Error("A saved first-attempt response set is invalid.");
+      }
+
+      const r = blankResponses();
+
+      for (const key of Object.keys(r)) {
+        r[key] = text(source[key], key, key === "guess" ? 80 : 4000);
+      }
+
+      if (r.pressureChoice &&
+          !CONFIG.teaching.commit.pressureChoices.some(c => c.id === r.pressureChoice)) {
+        throw new Error("The saved pressure choice is not supported.");
+      }
+
+      if (r.moleChoice &&
+          !CONFIG.teaching.commit.moleChoices.some(c => c.id === r.moleChoice)) {
+        throw new Error("The saved gas-sharing choice is not supported.");
+      }
+
+      if (r.guess.trim()) validVolume(r.guess);
+
+      return r;
+    }
+
+    const next = blankState();
+    next.draft = responses(w.draft);
+
+    if (w.attempt) {
+      if (!["written", "oral"].includes(w.attempt.kind)) {
+        throw new Error("The saved first-attempt route is invalid.");
+      }
+
+      const r = responses(w.attempt.responses);
+
+      if (w.attempt.kind === "written" &&
+          (!r.pressureChoice ||
+           !pressureAnswer(r).trim() ||
+           !r.moleChoice ||
+           !r.pressure.trim() ||
+           !r.moles.trim() ||
+           !r.reason.trim())) {
+        throw new Error("The saved written first attempt is incomplete.");
+      }
+
+      next.attempt = {
+        kind: w.attempt.kind,
+        responses: r,
+        teacherModeAtCommit: w.attempt.teacherModeAtCommit === true,
+        independenceVerified: false
+      };
+    }
+
+    if (!["predict", "lab", "check", "review"].includes(w.stage)) {
+      throw new Error("The saved activity stage is invalid.");
+    }
+
+    next.stage = w.stage;
+    next.teacherMode = w.teacherMode === true;
+    next.v = validVolume(w.volumeCm3);
+
+    if (!Number.isFinite(w.transferProgress) ||
+        w.transferProgress < 0 || w.transferProgress > 1) {
+      throw new Error("The saved transfer progress is invalid.");
+    }
+
+    next.s = w.transferProgress;
+    next.valveOpen = w.valveOpen === true;
+
+    if (next.s > 0 && !next.valveOpen) {
+      throw new Error("The saved valve state conflicts with transfer progress.");
+    }
+
+    if (!CONFIG.playback.speeds.includes(w.playbackSpeed)) {
+      throw new Error("The saved playback speed is unsupported.");
+    }
+
+    next.speed = w.playbackSpeed;
+    next.reduceMotion = w.reduceMotion === true;
+    next.runRecorded = w.runRecorded === true;
+
+    if (!Array.isArray(w.completedTrials) ||
+        w.completedTrials.length > CONFIG.storage.maxTrials) {
+      throw new Error("The saved completed-trial list is invalid.");
+    }
+
+    next.trials = w.completedTrials.map(item => {
+      if (!item || typeof item !== "object") {
+        throw new Error("A saved trial is invalid.");
+      }
+      return snapshot(validVolume(item.volumeCm3));
+    });
+
+    const slots = w.slots && typeof w.slots === "object" ? w.slots : {};
+
+    for (const slot of ["A", "B"]) {
+      next.slots[slot] = slots[slot]
+        ? snapshot(validVolume(slots[slot].volumeCm3))
+        : null;
+    }
+
+    next.evidence = text(w.evidence, "evidence");
+    next.checkEvidence = w.checkEvidence === null
+      ? null
+      : text(w.checkEvidence, "Q2 evidence snapshot");
+
+    next.q2Draft = text(w.q2Draft, "Q2 draft");
+    next.q2Claim = w.q2Claim === true;
+    next.consulted = w.experimentConsultedDuringCheck === true;
+    next.revision = text(w.revision, "revision");
+
+    if (w.q2) {
+      const answer = text(w.q2.answer, "Q2 answer");
+
+      if (!answer.trim()) {
+        throw new Error("The saved Q2 answer is blank.");
+      }
+
+      next.q2 = {
+        answer,
+        claimIndependent: w.q2.claimIndependent === true,
+        consulted: w.q2.consulted === true,
+        evidenceAtCheck: text(w.q2.evidenceAtCheck, "recorded evidence"),
+        attemptKind: next.attempt ? next.attempt.kind : "",
+        independenceVerified: false
+      };
+    }
+
+    if (next.stage === "predict" && next.attempt) {
+      throw new Error("The saved prediction stage conflicts with its first attempt.");
+    }
+
+    if (next.stage !== "predict" && !next.attempt) {
+      throw new Error("A first attempt is required for this saved stage.");
+    }
+
+    if (next.stage === "review" && !next.q2) {
+      throw new Error("The review stage requires a recorded Q2 answer.");
+    }
+
+    if (next.stage === "check" &&
+        (next.q2 || !next.trials.length || next.checkEvidence === null)) {
+      throw new Error("The saved independent-check stage is inconsistent.");
+    }
+
+    if (next.stage === "predict" &&
+        (next.trials.length || next.slots.A || next.slots.B ||
+         next.q2 || next.s !== 0 || next.valveOpen)) {
+      throw new Error("The prediction stage contains inconsistent later-stage data.");
+    }
+
+    next.solutionSeen = !!next.q2 && w.teacherReferenceSeen === true;
+    next.solutionVisible = false;
+    next.playing = false;
+
+    return next;
+  }
+
+  /*
+   * User-triggered checks.
+   * No results are claimed until these run in the user's browser.
+   */
+  function runModelAssertions() {
+    if (!state.q2) return;
+
+    const results = [];
+
+    function check(name, test) {
+      try {
+        if (!test()) throw new Error("Assertion condition was not satisfied.");
+        results.push({ name, pass: true, detail: "" });
+      } catch (error) {
+        results.push({ name, pass: false, detail: error.message });
+      }
+    }
+
+    const volumes = [
+      CONFIG.volume.min,
+      CONFIG.volume.initial,
+      CONFIG.volume.max,
+      targetVolume()
+    ];
+
+    check("Initial state: all gas in vessel 1; vessel 2 evacuated.", () =>
+      volumes.every(v => {
+        const m = model(v, 0);
+        return near(m.n1, P.n0mol) && m.n2 === 0 &&
+          near(m.p1, 1) && m.p2 === 0;
+      })
+    );
+
+    check("Total moles are conserved along the chosen path.", () =>
+      volumes.every(v =>
+        [0, .17, .53, .89, 1].every(s => {
+          const m = model(v, s);
+          return near(m.n1 + m.n2, P.n0mol) && m.n1 >= 0 && m.n2 >= 0;
+        })
+      )
+    );
+
+    check("Both chamber states satisfy PV = nRT in SI units.", () => {
+      const p0 = initialPressure();
+
+      return volumes.every(v =>
+        [0, .37, 1].every(s => {
+          const m = model(v, s);
+          return near(m.p1 * p0 * P.V1cm3 * 1e-6, m.n1 * P.R * T1) &&
+            near(m.p2 * p0 * v * 1e-6, m.n2 * P.R * T2);
+        })
+      );
+    });
+
+    check("Every tested final state has equal pressure.", () =>
+      volumes.every(v => {
+        const m = model(v, 1);
+        return near(m.p1, m.p2) && near(m.p1, m.pf);
+      })
+    );
+
+    check("The path retains a non-negative left-to-right pressure difference.", () =>
+      volumes.every(v =>
+        [0, .25, .5, .75, 1].every(s => {
+          const m = model(v, s);
+          return m.p1 + 1e-12 >= m.p2;
+        })
+      )
+    );
+
+    check("The derived V₂ gives the specified target pressure and mole split.", () => {
+      const m = model(targetVolume(), 1);
+
+      return near(m.pf, P.targetFraction) &&
+        near(m.n1, P.targetFraction * P.n0mol) &&
+        near(m.n2, (1 - P.targetFraction) * P.n0mol);
+    });
+
+    check("The equal-volume analytic comparison is consistent.", () =>
+      near(model(P.V1cm3, 1).pf, T2 / (T1 + T2))
+    );
+
+    check("Larger V₂ lowers the common final pressure.", () =>
+      model(CONFIG.volume.min, 1).pf > model(CONFIG.volume.max, 1).pf
+    );
+
+    check("Invalid, zero, negative, non-finite and out-of-range inputs are rejected.", () =>
+      [
+        0, -1, Infinity, NaN, "", "not-a-number",
+        CONFIG.volume.min / 2, CONFIG.volume.max * 2
+      ].every(value => {
+        try {
+          validVolume(value);
+          return false;
+        } catch (error) {
+          return true;
+        }
+      })
+    );
+
+    check("Pressure-fraction targets outside (0, 1) have no supported positive-volume solution.", () =>
+      [0, 1, -.1, 1.1, Infinity, NaN].every(q => targetVolume(q) === null)
+    );
+
+    check("Packet paths begin entirely in vessel 1 and finish at their assigned endpoints.", () =>
+      volumes.every(v => {
+        const count = packetCountForV2(v);
+        return Array.from(
+          { length: CONFIG.visual.packetCount },
+          (_, i) =>
+            transferPhase(i, 0, count) === 0 &&
+            transferPhase(i, 1, count) === (i < count ? 1 : 0)
+        ).every(Boolean);
+      })
+    );
+
+    $("testResults").replaceChildren();
+
+    for (const result of results) {
+      const item = document.createElement("li");
+      item.className = result.pass ? "test-pass" : "test-fail";
+      item.textContent =
+        `${result.pass ? "PASS" : "FAIL"} · ${result.name}` +
+        (result.detail ? ` ${result.detail}` : "");
+      $("testResults").appendChild(item);
+    }
+
+    const passed = results.filter(result => result.pass).length;
+    const summary = document.createElement("li");
+
+    summary.textContent =
+      `${passed}/${results.length} assertions satisfied when requested in this browser. ` +
+      "This is not a layout test, accessibility audit or assessment of the learner.";
+
+    $("testResults").appendChild(summary);
+    announce("Requested model assertions have run. Read the technical results.");
+  }
+
+  /*
+   * ============================================================
+   * INTERACTIONS
+   * ============================================================
+   */
+
+  function commitAttempt(kind) {
+    captureInputs();
+
+    let guess;
+
+    try {
+      guess = optionalGuess();
+    } catch (error) {
+      $("initialGuess").setCustomValidity(error.message);
+      $("initialGuess").reportValidity();
+      predictionError(error.message);
+      return;
+    }
+
+    state.attempt = {
+      kind,
+      responses: { ...state.draft },
+      teacherModeAtCommit: state.teacherMode,
+      independenceVerified: false
+    };
+
+    state.v = guess === null ? CONFIG.volume.initial : guess;
+    state.s = 0;
+    state.valveOpen = false;
+    state.playing = false;
+    state.runRecorded = false;
+    state.stage = "lab";
+    driftPhase = 0;
+
+    $("volumeInput").value = String(state.v);
+
+    render();
+    focusPanel("labPanel");
+
+    announce(kind === "oral"
+      ? "Teacher-reported oral first attempt recorded. Independent individual completion is not established."
+      : "Your first model is preserved. The lab is ready; open the valve to test it.");
+  }
+
+  function bindUI() {
+    for (const id of [
+      "otherPressure", "initialGuess", "pressureSetup", "moleSetup",
+      "pReason", "evidence", "q2Answer", "revision"
+    ]) {
+      $(id).addEventListener("input", () => {
+        $(id).setCustomValidity("");
+        $("predictionError").hidden = true;
+        captureInputs();
+      });
+    }
+
+    $("molePrediction").addEventListener("change", () => {
+      $("molePrediction").setCustomValidity("");
+      $("predictionError").hidden = true;
+      captureInputs();
+    });
+
+    $("q2Claim").addEventListener("change", captureInputs);
+
+    $("teacherMode").addEventListener("change", () => {
+      state.teacherMode = $("teacherMode").checked;
+      render();
+
+      announce(state.teacherMode
+        ? "Teacher presentation enabled. Oral unlocking still requires a reported first discussion."
+        : "Student display enabled. Existing records are retained.");
+    });
+
+    $("oralConfirm").addEventListener("change", () => {
+      $("oralUnlock").disabled = !$("oralConfirm").checked;
+    });
+
+    $("predictForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (state.attempt || !validateWrittenAttempt()) return;
+      commitAttempt("written");
+    });
+
+    $("oralUnlock").addEventListener("click", () => {
+      if (!state.teacherMode || !$("oralConfirm").checked || state.attempt) return;
+      commitAttempt("oral");
+    });
+
+    $("volumeInput").addEventListener("input", () => {
+      $("volumeInput").setCustomValidity("");
+    });
+
+    $("volumeForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      try {
+        const input = $("volumeInput");
+        input.setCustomValidity("");
+
+        if (input.validity.badInput) {
+          throw new Error("Enter a finite number for V₂.");
+        }
+
+        applyVolume(validVolume(input.value));
+      } catch (error) {
+        $("volumeInput").setCustomValidity(error.message);
+        $("volumeInput").reportValidity();
+        announce(error.message);
+      }
+    });
+
+    $("openValveBtn").addEventListener("click", () => {
+      if (state.stage !== "lab" || state.valveOpen) return;
+
+      state.valveOpen = true;
+      state.playing = true;
+
+      renderLab();
+      announce(
+        "Valve opened. Illustrative net redistribution is playing from left to right."
+      );
+    });
+
+    $("playBtn").addEventListener("click", () => {
+      if (state.stage !== "lab" || !state.valveOpen) return;
+      if (state.s === 1 && reducedMotion()) return;
+
+      state.playing = !state.playing;
+      renderLab();
+
+      announce(state.playing
+        ? state.s === 1
+          ? "Illustrative molecular motion resumed; equal-pressure values are unchanged."
+          : "Exchange playback resumed."
+        : "View paused. The particle view and numerical state are frozen.");
+    });
+
+    $("stepBtn").addEventListener("click", () => {
+      if (!state.valveOpen || state.s === 1) return;
+      setProgress(Math.min(1, state.s + CONFIG.playback.stepProgress));
+    });
+
+    $("finalBtn").addEventListener("click", () => {
+      state.valveOpen = true;
+      setProgress(1);
+    });
+
+    $("resetTrialBtn").addEventListener("click", () => {
+      applyVolume(state.v, "Current trial reset.");
+    });
+
+    $("speedSelect").addEventListener("change", () => {
+      const speed = Number($("speedSelect").value);
+
+      if (CONFIG.playback.speeds.includes(speed)) {
+        state.speed = speed;
+        announce(
+          "Playback pacing changed. The scientific model and final state are unchanged."
+        );
+      }
+    });
+
+    $("reduceMotion").addEventListener("change", () => {
+      state.reduceMotion = $("reduceMotion").checked;
+      state.playing = false;
+      renderLab();
+
+      announce(
+        "Particle-motion preference changed. Playback is paused; numerical states are unchanged."
+      );
+    });
+
+    $("progress").addEventListener("input", () => {
+      const progress = Number($("progress").value) / 1000;
+      setProgress(progress, progress === 1);
+    });
+
+    for (const slot of ["A", "B"]) {
+      $(`save${slot}`).addEventListener("click", () => {
+        if (state.s !== 1) return;
+
+        state.slots[slot] = snapshot(state.v);
+        renderComparison();
+
+        announce(
+          `Final state saved as ${slot}. This records model evidence, not conceptual mastery.`
+        );
+      });
+
+      $(`load${slot}`).addEventListener("click", () => {
+        if (!state.slots[slot]) return;
+
+        applyVolume(
+          state.slots[slot].volumeCm3,
+          `V₂ from ${slot} loaded for a fresh trial.`
+        );
+      });
+    }
+
+    $("clearAB").addEventListener("click", () => {
+      state.slots = { A: null, B: null };
+      renderComparison();
+
+      announce(
+        "A/B slots cleared. Completed-trial records and written evidence remain."
+      );
+    });
+
+    $("beginCheck").addEventListener("click", () => {
+      captureInputs();
+      state.playing = false;
+
+      if (state.q2) {
+        state.stage = "review";
+        render();
+        focusPanel("reviewPanel");
+        return;
+      }
+
+      if (!state.trials.length) {
+        announce("Complete an equal-pressure trial before opening Q2.");
+        return;
+      }
+
+      if (!requireNonBlank(["evidence"])) return;
+
+      if (state.checkEvidence === null) {
+        state.checkEvidence = state.evidence;
+      }
+
+      state.stage = "check";
+      render();
+      focusPanel("checkPanel");
+      $("q2Answer").focus();
+
+      announce("Q2 opened without new hints. Earlier work is hidden, not deleted.");
+    });
+
+    $("returnLabFromCheck").addEventListener("click", () => {
+      captureInputs();
+      state.consulted = true;
+      state.stage = "lab";
+      state.playing = false;
+
+      render();
+      focusPanel("labPanel");
+
+      announce(
+        "Experiment reopened. This consultation will remain in the Q2 record."
+      );
+    });
+
+    $("q2Form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (state.q2 || !requireNonBlank(["q2Answer"])) return;
+
+      captureInputs();
+
+      state.q2 = {
+        answer: state.q2Draft,
+        claimIndependent: state.q2Claim,
+        consulted: state.consulted,
+        evidenceAtCheck: state.checkEvidence || "",
+        attemptKind: state.attempt.kind,
+        independenceVerified: false
+      };
+
+      state.stage = "review";
+      state.playing = false;
+
+      render();
+      focusPanel("reviewPanel");
+
+      announce(
+        "Q2 preserved without automatic marking. Revisions will not overwrite this first answer."
+      );
+    });
+
+    $("backToLab").addEventListener("click", () => {
+      captureInputs();
+      state.stage = "lab";
+      state.playing = false;
+
+      render();
+      focusPanel("labPanel");
+
+      announce("Experiment reopened. Your first Q2 answer remains locked.");
+    });
+
+    $("showReference").addEventListener("click", () => {
+      if (!state.q2) return;
+
+      captureInputs();
+      state.solutionVisible = !state.solutionVisible;
+
+      if (state.solutionVisible) state.solutionSeen = true;
+
+      renderReview();
+
+      announce(state.solutionVisible
+        ? "Teacher reference revealed after Q2. This reveal is retained in your record."
+        : "Teacher reference hidden. The record still notes that it was previously seen.");
+    });
+
+    $("runChecks").addEventListener("click", runModelAssertions);
+
+    $("printWorksheetBtn").addEventListener("click", () => {
+      if (state.stage === "check") return;
+
+      state.playing = false;
+      renderLab();
+      buildWorksheet();
+
+      try {
+        window.print();
+        announce(
+          "Print dialogue requested. The browser controls printing and PDF saving."
+        );
+      } catch (error) {
+        announce(`Printing could not be requested: ${error.message}`);
+      }
+    });
+
+    window.addEventListener("beforeprint", () => {
+      state.playing = false;
+      buildWorksheet(state.stage === "check");
+    });
+
+    window.addEventListener("afterprint", () => {
+      buildWorksheet();
+      renderLab();
+    });
+
+    $("exportBriefBtn").addEventListener("click", () => {
+      if (state.stage === "check") return;
+
+      downloadJSON(
+        "gas-exchange-shared-teaching-brief.json",
+        teachingBrief()
+      );
+    });
+
+    $("exportRecord").addEventListener("click", () => {
+      if (state.stage === "check") return;
+
+      downloadJSON(
+        "gas-exchange-learner-record.json",
+        recordObject()
+      );
+    });
+
+    $("saveLocal").addEventListener("click", () => {
+      try {
+        const record = JSON.stringify(recordObject());
+
+        if (record.length > CONFIG.storage.maxRecordCharacters) {
+          throw new Error("The record exceeds the configured size limit.");
+        }
+
+        localStorage.setItem(CONFIG.storage.key, record);
+
+        announce(
+          "One local copy has been saved/replaced. Nothing was sent over a network. " +
+          "Browser-local storage is not a permanent backup."
+        );
+      } catch (error) {
+        announce(
+          `Local saving was not completed: ${error.message} ` +
+          "Use explicit JSON export outside the Q2 screen if available."
+        );
+      }
+    });
+
+    $("loadLocal").addEventListener("click", () => {
+      if (state.stage === "check") return;
+
+      try {
+        const raw = localStorage.getItem(CONFIG.storage.key);
+
+        if (!raw) {
+          announce("No local saved copy was found for this version.");
+          return;
+        }
+
+        if (raw.length > CONFIG.storage.maxRecordCharacters) {
+          throw new Error("The saved record is too large.");
+        }
+
+        const restored = decodeRecord(JSON.parse(raw));
+
+        if (!window.confirm(
+          "Replace current page work with the saved local copy? " +
+          "Playback will be paused. Export current work first if you need it."
+        )) return;
+
+        state = restored;
+        driftPhase = 0;
+        $("testResults").replaceChildren();
+
+        hydrateInputs();
+        render();
+        focusPanel(`${state.stage}Panel`);
+
+        announce(
+          "Local copy restored with playback paused. The teacher reference is hidden until requested again."
+        );
+      } catch (error) {
+        announce(`The local copy was not loaded: ${error.message}`);
+      }
+    });
+
+    $("clearLocal").addEventListener("click", () => {
+      if (!window.confirm(
+        "Delete this version's browser-local saved copy? " +
+        "Current page work, earlier-version records and downloaded files will remain."
+      )) return;
+
+      try {
+        localStorage.removeItem(CONFIG.storage.key);
+        announce(
+          "This version's local saved copy was deleted. Current work and downloads are unchanged."
+        );
+      } catch (error) {
+        announce(`The local copy could not be deleted: ${error.message}`);
+      }
+    });
+
+    $("startOver").addEventListener("click", () => {
+      if (!window.confirm(
+        "Clear current predictions, trials, comparisons, Q2 and revisions? " +
+        "The saved local copy and downloaded files will remain."
+      )) return;
+
+      state = blankState();
+      driftPhase = 0;
+      $("testResults").replaceChildren();
+      $("referencePanel").replaceChildren();
+
+      hydrateInputs();
+      render();
+      focusPanel("predictPanel");
+
+      announce(
+        "Current work cleared. Separately saved local copies and downloads remain."
+      );
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && state.playing) {
+        state.playing = false;
+        renderLab();
+        announce("Playback paused because this tab became inactive.");
+      }
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+
+    if (typeof ResizeObserver === "function") {
+      const observer = new ResizeObserver(resizeCanvas);
+      observer.observe($("gasCanvas"));
+    }
+
+    if (motionQuery) {
+      const handleMotion = event => {
+        systemReducedMotion = event.matches;
+        state.playing = false;
+        renderLab();
+        announce("System motion preference updated. Playback is paused.");
+      };
+
+      if (typeof motionQuery.addEventListener === "function") {
+        motionQuery.addEventListener("change", handleMotion);
+      } else if (typeof motionQuery.addListener === "function") {
+        motionQuery.addListener(handleMotion);
+      }
+    }
+  }
+
+  /*
+   * ============================================================
+   * INITIALISATION
+   * ============================================================
+   */
+
+  try {
+    validateConfiguration();
+    SHARED = sharedTexts();
+
+    SIGNATURE = JSON.stringify({
+      physics: P,
+      shared: SHARED,
+      commit: CONFIG.teaching.commit,
+      allowedVolume: [CONFIG.volume.min, CONFIG.volume.max],
+      recordVersion: 2
+    });
+
+    state = blankState();
+    ctx = $("gasCanvas").getContext("2d");
+
+    buildStaticContent();
+
+    if (!ctx) {
+      $("particleNote").textContent =
+        "Canvas is unavailable in this browser. " +
+        "Use the numerical readouts and SVG pressure chart; the numerical model remains available.";
+    }
+
+    bindUI();
+    hydrateInputs();
+    render();
+
+    window.requestAnimationFrame(frame);
+  } catch (error) {
+    $("fatalPanel").hidden = false;
+    $("fatalMessage").textContent = error.message;
+
+    for (const id of [
+      "predictPanel", "labPanel", "checkPanel", "reviewPanel"
+    ]) {
+      $(id).hidden = true;
+    }
+
+    document.querySelectorAll("button, input, textarea, select")
+      .forEach(control => {
+        control.disabled = true;
+      });
+
+    announce(
+      "The activity stopped rather than inventing a result. Review CONFIG and reload."
+    );
+  }
+})();
+</script>
+</body>
+</html>
